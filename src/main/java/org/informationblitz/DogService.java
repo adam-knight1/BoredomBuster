@@ -1,5 +1,6 @@
 package org.informationblitz;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,6 +31,8 @@ public class DogService {
 
         InputStream responseStream = connection.getInputStream();
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        //including this feature due to numerous, irrelevant dog breed attributes
         DogDTO[] dogs = mapper.readValue(responseStream, DogDTO[].class);
 
         if (dogs.length > 0) {
