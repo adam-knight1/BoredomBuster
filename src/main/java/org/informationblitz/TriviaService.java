@@ -19,9 +19,18 @@ public class TriviaService {
     public void getTriviaFromAPI() throws IOException {
         System.out.println("Please choose from the following available categories: ");
         System.out.println(Arrays.toString(categories));
-        String catChoice = scanner.nextLine();
-        System.out.println("You'll be asked a series of 10 questions");
-        System.out.println("At the end, you'll see your total score!");
+        String catChoice = "";
+
+        boolean isValidCategory = false;
+
+        while (!isValidCategory) {
+            catChoice = scanner.nextLine();
+
+            isValidCategory = Arrays.
+                 if (catChoice.Arrays.t)
+        }
+            System.out.println("You'll be asked a series of 10 questions");
+            System.out.println("At the end, you'll see your total score!");
 
         boolean keepGoing = true;
         int counter = 0;
