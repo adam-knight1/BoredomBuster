@@ -3,6 +3,7 @@ package org.informationblitz.service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.informationblitz.dto.DogDTO;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +12,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
-
+@Service
 public class DogService {
     Scanner scanner = new Scanner(System.in);
 
@@ -37,6 +38,8 @@ public class DogService {
     }
 }
 
+
+//maintaining a copy of my original API for future print statement recylcing etc.
 
     /*public void getDogInfoFromAPI() throws IOException {
         System.out.println("Please enter the name of a dog breed that you want information on: ");
