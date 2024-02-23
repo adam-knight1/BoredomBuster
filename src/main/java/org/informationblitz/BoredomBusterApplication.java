@@ -3,11 +3,13 @@ import org.informationblitz.service.DogService;
 import org.informationblitz.service.FactService;
 import org.informationblitz.service.TriviaService;
 import org.informationblitz.service.WeatherService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 import java.util.Scanner;
-
-public class Main {
+@SpringBootApplication
+public class BoredomBusterApplication {
 
     static TriviaService triviaService = new TriviaService();
     static WeatherService weatherService = new WeatherService();
@@ -18,7 +20,10 @@ public class Main {
     private static String[] symbols = null; // to store fetched symbols
 
     public static void main(String[] args) throws IOException {
-        while (true) {
+
+        SpringApplication.run(BoredomBusterApplication.class, args);
+
+        /*while (true) {
             System.out.println("Welcome to the BoredomBuster app!");
             System.out.println("1. Get a Random Fact");
             System.out.println("2. Get Weather Information by Zip Code");
@@ -46,10 +51,10 @@ public class Main {
                 default:
                     System.out.println("Invalid option, please try again");
                     break;
-            }
+            }*/
         }
     }
-}
+
 
 
 
