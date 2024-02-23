@@ -24,9 +24,16 @@ public class DogService {
         connection.setRequestProperty("accept", "application/json");
         InputStream responseStream = connection.getInputStream();
         ObjectMapper mapper = new ObjectMapper();
+        DogDTO dog = mapper.readValue(responseStream, DogDTO.class);
         //JsonNode root = mapper.readTree(responseStream);
+        //System.out.println(root.path("fact").asText());
 
-        System.out.println(root.path("fact").asText());
+        if (dog != null) {
+            System.out.println("The " + dogBreed + "'s energy level is: " + dog.getEnergy() );
+            System.out.println("The " + dogBreed + "'s shedding level is: " + dog.getShedding() );
+            System.out.println("The " + dogBreed + "'s trainability level is: " + dog.getTrainability() );
+            System.out.println("The " + dogBreed + "'s minimum life expectancy is: " + dog.getMinLifeExpectancy() );
+        }   System.out.println("The " + dogBreed + "'s maximum life expectancy is: " + dog.getMaxLifeExpectancy() );
     }
 
 }
