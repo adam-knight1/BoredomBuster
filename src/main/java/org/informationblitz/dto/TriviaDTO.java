@@ -1,4 +1,4 @@
-package org.informationblitz;
+package org.informationblitz.dto;
 
 public class TriviaDTO {
     public String triviaQuestion;
