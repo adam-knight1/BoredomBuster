@@ -15,7 +15,30 @@ import java.util.Scanner;
 public class DogService {
     Scanner scanner = new Scanner(System.in);
 
-    public void getDogInfoFromAPI() throws IOException {
+
+    public DogDTO getDogInfoFromAPI(String breedName) throws IOException {
+        String encodedBreedName = URLEncoder.encode(breedName, StandardCharsets.UTF_8.toString());
+
+        URL url = new URL("https://api.api-ninjas.com/v1/dogs?name=" + encodedBreedName);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("X-Api-key", "iksW+ahtgKdZfdUHvWXGXA==Tv4PHnyj3CpuUHQP");
+        connection.setRequestProperty("accept", "application/json");
+
+        InputStream responseStream = connection.getInputStream();
+        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        DogDTO[] dogs = mapper.readValue(responseStream, DogDTO[].class);
+
+        if (dogs.length > 0) {
+            return dogs[0]; // grabbing the first dog in the array
+        } else {
+            //will add logic for dog not found
+            return null;
+        }
+    }
+}
+
+
+    /*public void getDogInfoFromAPI() throws IOException {
         System.out.println("Please enter the name of a dog breed that you want information on: ");
         String dogBreed = scanner.nextLine();
 
@@ -44,6 +67,6 @@ public class DogService {
         } else {
             System.out.println("There was an error retrieving information for this dog breed");
         }
-    }
+    }*/
 
-}
+
