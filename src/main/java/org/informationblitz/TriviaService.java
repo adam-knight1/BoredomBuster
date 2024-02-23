@@ -17,18 +17,24 @@ public class TriviaService {
     Scanner scanner = new Scanner(System.in);
 
     public void getTriviaFromAPI() throws IOException {
-        System.out.println("Please choose from the following available categories: ");
-        System.out.println(Arrays.toString(categories));
         String catChoice = "";
-
         boolean isValidCategory = false;
 
-        while (!isValidCategory) {
-            catChoice = scanner.nextLine();
+        System.out.println("Please choose from the following available categories: ");
+        System.out.println(Arrays.toString(categories));
 
-            isValidCategory = Arrays.
-                 if (catChoice.Arrays.t)
+        while (!isValidCategory) {
+
+            catChoice = scanner.nextLine();
+            isValidCategory = Arrays.asList(categories).contains(catChoice);
+
+            if (!isValidCategory) {
+                System.out.println(catChoice + " is an invalid selection.");
+                System.out.println("Please choose from the following available categories: ");
+                System.out.println(Arrays.toString(categories));
+            }
         }
+            System.out.println("You chose: " + catChoice);
             System.out.println("You'll be asked a series of 10 questions");
             System.out.println("At the end, you'll see your total score!");
 
