@@ -4,15 +4,15 @@ import java.util.Scanner;
 
 public class Main {
 
+    static TriviaService triviaService = new TriviaService();
+    static WeatherService weatherService = new WeatherService();
+    static FactService factService = new FactService();
+    static DogService dogService = new DogService();
+    static Scanner scanner = new Scanner(System.in);
+
     private static String[] symbols = null; // to store fetched symbols
 
     public static void main(String[] args) throws IOException {
-        TriviaService triviaService = new TriviaService();
-        WeatherService weatherService = new WeatherService();
-        FactService factService = new FactService();
-        DogService dogService = new DogService();
-        Scanner scanner = new Scanner(System.in);
-
         while (true) {
             System.out.println("Welcome to the BoredomBuster app!");
             System.out.println("1. Get a Random Fact");

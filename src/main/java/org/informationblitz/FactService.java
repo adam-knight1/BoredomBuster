@@ -13,6 +13,9 @@ public class FactService {
 
     public void getFactsFromAPI() {
         Scanner scanner = new Scanner(System.in);
+        boolean keepGoing = true;
+
+        while (keepGoing)
         try {
             System.out.println("How many facts would you like to see, up to 3");
             int numOfFacts = scanner.nextInt();
@@ -31,6 +34,9 @@ public class FactService {
                     String fact = node.path("fact").asText();
                     System.out.println("Fact number: " + factCounter + ": " + fact);
                     factCounter++;
+                    if (factCounter > numOfFacts) {
+                        keepGoing = false;
+                    }
                 }
             }
 
