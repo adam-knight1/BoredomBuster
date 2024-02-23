@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class DogService {
@@ -17,23 +19,29 @@ public class DogService {
         System.out.println("Please enter the name of a dog breed that you want information on: ");
         String dogBreed = scanner.nextLine();
 
+        //Using Java's URLEncoder class to account for frequent spaces in dog breed names
+        String encodedDogBreed = URLEncoder.encode(dogBreed, StandardCharsets.UTF_8.toString());
         System.out.println("You entered: " + dogBreed);
 
-        URL url = new URL("https://api.api-ninjas.com/v1/dogs?name=" + dogBreed);
+        URL url = new URL("https://api.api-ninjas.com/v1/dogs?name=" + encodedDogBreed);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("X-Api-key", "iksW+ahtgKdZfdUHvWXGXA==Tv4PHnyj3CpuUHQP");
         connection.setRequestProperty("accept", "application/json");
+
         InputStream responseStream = connection.getInputStream();
         ObjectMapper mapper = new ObjectMapper();
-        DogDTO dog = mapper.readValue(responseStream, DogDTO.class);
-        //JsonNode root = mapper.readTree(responseStream);
-        //System.out.println(root.path("fact").asText());
+        DogDTO[] dogs = mapper.readValue(responseStream, DogDTO[].class);
 
-        if (dog != null) {
-            System.out.println("The " + dogBreed + "'s energy level is: " + dog.getEnergy() );
-            System.out.println("The " + dogBreed + "'s shedding level is: " + dog.getShedding() );
-            System.out.println("The " + dogBreed + "'s trainability level is: " + dog.getTrainability() );
-            System.out.println("The " + dogBreed + "'s minimum life expectancy is: " + dog.getMinLifeExpectancy() );
-        }   System.out.println("The " + dogBreed + "'s maximum life expectancy is: " + dog.getMaxLifeExpectancy() );
+        if (dogs.length > 0) {
+            DogDTO dog = dogs[0];
+            System.out.println("The " + dogBreed + "'s energy level is: " + dog.getEnergy());
+            System.out.println("The " + dogBreed + "'s shedding level is: " + dog.getShedding());
+            System.out.println("The " + dogBreed + "'s trainability level is: " + dog.getTrainability());
+            System.out.println("The " + dogBreed + "'s minimum life expectancy is: " + dog.getMinLifeExpectancy());
+            System.out.println("The " + dogBreed + "'s maximum life expectancy is: " + dog.getMaxLifeExpectancy());
+        } else {
+            System.out.println("There was an error retrieving information for this dog breed");
+        }
     }
 
 }
