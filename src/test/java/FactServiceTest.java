@@ -12,13 +12,6 @@ public class FactServiceTest {
     private void makeHTTPCall_validURL_returnsFact() throws MalformedURLException {
         URL goodURL = new URL("https://api.api-ninjas.com/v1/facts?limit=3");
 
-
-
-
-
-
-
-
     }
 
 
