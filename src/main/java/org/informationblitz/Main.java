@@ -1,4 +1,9 @@
 package org.informationblitz;
+import org.informationblitz.service.DogService;
+import org.informationblitz.service.FactService;
+import org.informationblitz.service.TriviaService;
+import org.informationblitz.service.WeatherService;
+
 import java.io.IOException;
 import java.util.Scanner;
 

@@ -1,7 +1,7 @@
-package org.informationblitz;
+package org.informationblitz.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.informationblitz.dto.TriviaDTO;
 
 import java.io.IOException;
 import java.io.InputStream;

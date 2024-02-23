@@ -1,4 +1,4 @@
-package org.informationblitz;
+package org.informationblitz.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
