@@ -6,29 +6,47 @@ function App() {
 
   // after the component mounts, this fetches the dog data
   useEffect(() => {
-    fetch('/api/dogs?name=golden retriever') //GET, need to put correct url in
-      .then(response => response.json())
+    const breedName = "golden retriever"; // for temporary example
+    fetch(`/api/dogs/dog?breedName=${encodeURIComponent(breedName)}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
-        console.log(data); // log to see the structure
-        setDog(data); // idk if backend will return correctly yet
+        console.log(data);
+        setDog(data);
       })
       .catch(error => console.error('There was an error!', error));
-  }, []); //runs once after initial render?
+  }, []);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        {dog ? (
-          <div>
-            <h1>{dog.name}</h1> {/* dog name*/}
-            {/* the other stuff */}
-          </div>
-        ) : (
-          <p>Loading...</p> //will integrate more detailed load message.
-        )}
-      </header>
-    </div>
-  );
-}
+
+
+   return (
+     <div className="App">
+       <header className="App-header">
+         {dog ? (
+           <div>
+             <h1>{dog.name}</h1>
+             <img src={dog.imageLink} alt={dog.name} style={{ maxWidth: "200px", maxHeight: "200px" }} />
+             <p>Grooming: {dog.grooming}</p>
+             <p>Good with children: {dog.goodWithChildren}</p>
+             <p>Good with other dogs: {dog.goodWithOtherDogs}</p>
+             <p>Shedding level: {dog.shedding}</p>
+             <p>Energy level: {dog.energy}</p>
+             <p>Trainability: {dog.trainability}</p>
+             <p>Minimum life expectancy: {dog.minLifeExpectancy} years</p>
+             <p>Maximum life expectancy: {dog.maxLifeExpectancy} years</p>
+           </div>
+         ) : (
+           <p>Loading...</p>
+         )}
+       </header>
+     </div>
+   );
+ }
+
+
 
 export default App;
