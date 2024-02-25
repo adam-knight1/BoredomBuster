@@ -28,6 +28,35 @@
   color: #61dafb;
 }
 
+.dog-info {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #61dafb; /* Light blue border */
+  border-radius: 10px;
+  background-color: #282c34; /* Dark background */
+  color: #61dafb; /* Light blue text */
+}
+
+.dog-detail {
+  margin: 10px 0;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #007bff; /* Bootstrap primary color */
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
