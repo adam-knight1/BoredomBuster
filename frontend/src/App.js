@@ -1,3 +1,4 @@
+/*
 import React, { useState, useEffect } from 'react';
 
 function App() {
@@ -47,6 +48,35 @@ function App() {
    );
  }
 
+export default App;
+*/
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import DogFacts from './DogFacts.js';
 
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <h1>Welcome to the Boredom Buster App</h1>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/dog-facts">Go to Dog Facts</Link>
+              </li>
+              {/* Add more navigation links eventually */}
+            </ul>
+          </nav>
+        </header>
+        <Routes>
+          <Route path="/dog-facts" element={<DogFacts />} />
+          {/* I can add more Route components for other paths as needed */}
+          <Route path="/" element={<h2>Click on the links above to navigate through the app.</h2>} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
 
 export default App;
