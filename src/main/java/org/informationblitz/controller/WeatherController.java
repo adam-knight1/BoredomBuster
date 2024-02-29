@@ -30,17 +30,17 @@ public class WeatherController {
 
     @GetMapping("/forecast")
     public ResponseEntity<WeatherDTO> getWeatherInfo(
-            @RequestParam(required = false) String zipCode,
+            @RequestParam(required = false) String zip,
             @RequestParam(required = false) String city,
             @RequestParam(required = false) String state) {
 
-        logger.info("Received getWeatherInfo request with parameters - zipCode: {}, city: {}, state: {}", zipCode, city, state);
+        logger.info("Received getWeatherInfo request with parameters - zipCode: {}, city: {}, state: {}", zip, city, state);
 
         try {
             WeatherDTO weatherInfo;
-            if (zipCode != null && !zipCode.trim().isEmpty()) {
-                logger.info("Querying weather information by zipCode: {}", zipCode);
-                weatherInfo = weatherService.getWeatherFromAPI("zip", zipCode, null);
+            if (zip != null && !zip.trim().isEmpty()) {
+                logger.info("Querying weather information by zipCode: {}", zip);
+                weatherInfo = weatherService.getWeatherFromAPI("zip", zip, null);
             } else if (city != null && !city.trim().isEmpty() && state != null && !state.trim().isEmpty()) {
                 logger.info("Querying weather information by city: {} and state: {}", city, state);
                 weatherInfo = weatherService.getWeatherFromAPI("city", city, state);
