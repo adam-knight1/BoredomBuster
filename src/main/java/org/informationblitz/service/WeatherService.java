@@ -9,48 +9,61 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class WeatherService {
 
-    public WeatherDTO getWeatherFromAPI(String zip) throws IOException {
-        URL url = new URL("https://api.api-ninjas.com/v1/weather?zip=" + zip);
+    public WeatherDTO getWeatherFromAPI(String queryType, String queryValue, String state, String country) throws IOException {
+        String apiKey = System.getenv("API_KEY"); //source apiKey from env variables
+        StringBuilder requestUrlBuilder = new StringBuilder("https://api.api-ninjas.com/v1/weather?");
+        //the sb is created and used to create the URL for each request depending on user input
 
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestProperty("X-Api-key", "iksW+ahtgKdZfdUHvWXGXA==Tv4PHnyj3CpuUHQP");
-        connection.setRequestProperty("accept", "application/json");
+        switch (queryType.toLowerCase()) {
+            case "zip":
+                requestUrlBuilder.append("zip=").append(URLEncoder.encode(queryValue, StandardCharsets.UTF_8.toString()));
+                break;
+            case "city":
+                requestUrlBuilder.append("city=").append(URLEncoder.encode(queryValue, StandardCharsets.UTF_8.toString()));
+                if (state != null && !state.isEmpty()) {
+                    requestUrlBuilder.append("&state=").append(URLEncoder.encode(state, StandardCharsets.UTF_8.toString()));
+                }
+                if (country != null && !country.isEmpty()) {
+                    requestUrlBuilder.append("&country=").append(URLEncoder.encode(country, StandardCharsets.UTF_8.toString()));
+                }
+                break;
+            case "latlon":
+                String[] coords = queryValue.split(",");
+                if (coords.length == 2) {
+                    requestUrlBuilder.append("lat=").append(URLEncoder.encode(coords[0], StandardCharsets.UTF_8.toString()))
+                            .append("&lon=").append(URLEncoder.encode(coords[1], StandardCharsets.UTF_8.toString()));
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid query type: " + queryType);
+        }
 
-        InputStream responseStream = connection.getInputStream();
-        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-        /*
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter zip code:");
-        String zip = scanner.nextLine();
-
+        HttpURLConnection connection = null;
         try {
-            URL url = new URL("https://api.api-ninjas.com/v1/weather?zip=" + zip);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("X-Api-Key", "iksW+ahtgKdZfdUHvWXGXA==Tv4PHnyj3CpuUHQP");
+            URL url = new URL(requestUrlBuilder.toString());
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("X-Api-Key", apiKey);
             connection.setRequestProperty("accept", "application/json");
 
-            InputStream responseStream = connection.getInputStream();
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode root = mapper.readTree(responseStream);
-            String temperature = root.path("temp").asText();
-            String windSpeed = root.path("wind_speed").asText();
-            String windDegrees = root.path("wind_degrees").asText();
-            String maxTemp = root.path("max_temp").asText();
-            String minTemp = root.path("min_temp").asText();
+            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new IOException("HTTP error code: " + connection.getResponseCode());
+            }
 
-            System.out.println("Temperature: " + temperature);
-            System.out.println("Wind Speed: " + windSpeed);
-            System.out.println("Wind Degrees: " + windDegrees);
-            System.out.println("Max Temperature: " + maxTemp);
-            System.out.println("Min Temperature: " + minTemp);
-        } catch (Exception e) {
-            System.out.println("Failed to fetch weather data.");
-            e.printStackTrace();
-        }*/
+            InputStream responseStream = connection.getInputStream();
+            ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            WeatherDTO weather = mapper.readValue(responseStream, WeatherDTO.class);
+            return weather;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
     }
 }

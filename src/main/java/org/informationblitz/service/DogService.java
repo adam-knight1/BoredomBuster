@@ -22,7 +22,9 @@ public class DogService {
 
         URL url = new URL("https://api.api-ninjas.com/v1/dogs?name=" + encodedBreedName);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestProperty("X-Api-key", "iksW+ahtgKdZfdUHvWXGXA==Tv4PHnyj3CpuUHQP");
+
+        String apiKey = System.getenv("API_KEY"); //sourcing key from env variables
+        connection.setRequestProperty("X-Api-key",apiKey);
         connection.setRequestProperty("accept", "application/json");
 
         InputStream responseStream = connection.getInputStream();
