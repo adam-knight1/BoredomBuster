@@ -32,37 +32,24 @@ public class WeatherController {
     public ResponseEntity<WeatherDTO> getWeatherInfo(
             @RequestParam(required = false) String zipCode,
             @RequestParam(required = false) String city,
-            @RequestParam(required = false) String state,
-            @RequestParam(required = false) String country,
-            @RequestParam(required = false) Double lat,
-            @RequestParam(required = false) Double lon) {
+            @RequestParam(required = false) String state) {
+
+        logger.info("Received getWeatherInfo request with parameters - zipCode: {}, city: {}, state: {}", zipCode, city, state);
+
         try {
-            WeatherDTO weatherInfo = null;
-            logger.info("Received getWeatherInfo request with parameters - zipCode: {}, city: {}, state: {}, country: {}, lat: {}, lon: {}", zipCode, city, state, country, lat, lon);
-
-
-            if (zipCode != null && !zipCode.isEmpty()) {
+            WeatherDTO weatherInfo;
+            if (zipCode != null && !zipCode.trim().isEmpty()) {
                 logger.info("Querying weather information by zipCode: {}", zipCode);
-                weatherInfo = weatherService.getWeatherFromAPI("zip", zipCode, null, null);
-            } else if (city != null && !city.isEmpty()) {
-                logger.info("Querying weather information by city: {}, state: {}, country: {}", city, state, country);
-                weatherInfo = weatherService.getWeatherFromAPI("city", city, state, country);
-            } else if (lat != null && lon != null) {
-                String latLon = lat + "," + lon;
-                logger.info("Querying weather information by lat/lon: {}", latLon);
-                weatherInfo = weatherService.getWeatherFromAPI("latlon", latLon, null, null);
+                weatherInfo = weatherService.getWeatherFromAPI("zip", zipCode, null);
+            } else if (city != null && !city.trim().isEmpty() && state != null && !state.trim().isEmpty()) {
+                logger.info("Querying weather information by city: {} and state: {}", city, state);
+                weatherInfo = weatherService.getWeatherFromAPI("city", city, state);
             } else {
                 logger.warn("No valid query parameters provided for weather information request.");
-                return ResponseEntity.badRequest().body(null);
+                return ResponseEntity.badRequest().build();
             }
 
-            if (weatherInfo != null) {
-                logger.info("Successfully retrieved weather information");
-                return ResponseEntity.ok(weatherInfo);
-            } else {
-                logger.warn("Weather information not found for the given parameters.");
-                return ResponseEntity.notFound().build();
-            }
+            return ResponseEntity.ok(weatherInfo);
         } catch (Exception e) {
             logger.error("Error while retrieving weather information", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
