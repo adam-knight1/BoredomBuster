@@ -1,16 +1,29 @@
 package org.informationblitz.service;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.informationblitz.dto.WeatherDTO;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
 public class WeatherService {
-    public void getWeatherFromAPI() {
 
+    public WeatherDTO getWeatherFromAPI(String zip) throws IOException {
+        URL url = new URL("https://api.api-ninjas.com/v1/weather?zip=" + zip);
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("X-Api-key", "iksW+ahtgKdZfdUHvWXGXA==Tv4PHnyj3CpuUHQP");
+        connection.setRequestProperty("accept", "application/json");
+
+        InputStream responseStream = connection.getInputStream();
+        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        /*
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter zip code:");
         String zip = scanner.nextLine();
@@ -38,6 +51,6 @@ public class WeatherService {
         } catch (Exception e) {
             System.out.println("Failed to fetch weather data.");
             e.printStackTrace();
-        }
+        }*/
     }
 }
