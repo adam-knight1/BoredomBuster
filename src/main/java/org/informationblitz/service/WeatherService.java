@@ -46,11 +46,14 @@ public class WeatherService {
                 throw new IllegalArgumentException("Invalid query type: " + queryType);
         }
 
+        System.out.println("Request URL: " + requestUrlBuilder);
+
         HttpURLConnection connection = null;
         try {
             URL url = new URL(requestUrlBuilder.toString());
+            System.out.println("Request URL: " + requestUrlBuilder.toString());
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("X-Api-Key", apiKey);
+            connection.setRequestProperty("API_KEY", apiKey);
             connection.setRequestProperty("accept", "application/json");
 
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
