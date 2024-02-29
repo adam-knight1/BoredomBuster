@@ -44,9 +44,12 @@ public class WeatherController {
             } else if (city != null && !city.trim().isEmpty() && state != null && !state.trim().isEmpty()) {
                 logger.info("Querying weather information by city: {} and state: {}", city, state);
                 weatherInfo = weatherService.getWeatherFromAPI("city", city, state);
-            } else {
-                logger.warn("No valid query parameters provided for weather information request.");
-                return ResponseEntity.badRequest().build();
+            }  else if (city != null && !city.trim().isEmpty()) {
+                    logger.info("Querying weather information by city: {} without state", city);
+                    weatherInfo = weatherService.getWeatherFromAPI("city", city, null);
+            }   else {
+                    logger.warn("No valid query parameters provided for weather information request.");
+                    return ResponseEntity.badRequest().build();
             }
 
             return ResponseEntity.ok(weatherInfo);

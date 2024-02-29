@@ -23,7 +23,11 @@ public class WeatherService {
         String apiUrl = "https://api.api-ninjas.com/v1/weather?";
         String queryParam = "";
 
-        if ("zip".equals(type)) {
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IllegalStateException("API key is not configured");
+
+
+            if ("zip".equals(type)) {
             queryParam = "zip=" + URLEncoder.encode(value, StandardCharsets.UTF_8);
         } else if ("city".equals(type)) {
             queryParam = "city=" + URLEncoder.encode(value, StandardCharsets.UTF_8);
