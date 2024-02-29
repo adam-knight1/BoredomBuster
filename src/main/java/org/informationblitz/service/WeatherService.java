@@ -31,7 +31,6 @@ public class WeatherService {
         logger.info(type);
         String apiKey = System.getenv("API_KEY"); //sourcing key from env variables
 
-
         String apiUrl = "https://api.api-ninjas.com/v1/weather?";
         StringBuilder queryParam = new StringBuilder();
 
