@@ -31,19 +31,25 @@ public class TriviaService {
         //append category to URL
         //open connection and set key
         //return TriviaDTO with random trivia question
+
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IllegalStateException("API key for trivia is not set");
+        }
+
         URL url = new URL("https://api.api-ninjas.com/v1/dogs?name=" + category);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         connection.setRequestProperty("X-Api-key",apiKey);
-        connection.setRequestProperty("accept", "application/json");;
+        connection.setRequestProperty("accept", "application/json");
 
+        int responseCode = connection.getResponseCode();
+
+        if (responseCode == HttpURLConnection.HTTP_OK){
         InputStream responseStream = connection.getInputStream();
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         TriviaDTO[] triviaDto = mapper.readValue(responseStream, TriviaDTO[].class);
 
-
-
-        return new TriviaDTO();
+        return triviaDto;
     }
 
     public void getTriviaFromAPI() throws IOException {
