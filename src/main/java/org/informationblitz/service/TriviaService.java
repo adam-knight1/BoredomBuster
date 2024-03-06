@@ -12,7 +12,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.net.http.HttpHeaders;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -36,7 +38,10 @@ public class TriviaService {
             throw new IllegalStateException("API key for trivia is not set");
         }
 
-        URL url = new URL("https://api.api-ninjas.com/v1/dogs?name=" + category);
+        String encodedCategory = category != null && !category.isEmpty() ? URLEncoder.encode(category, StandardCharsets.UTF_8.toString()) : "";
+        String triviaApiUrl = "https://api.api-ninjas.com/v1/trivia" + (!encodedCategory.isEmpty() ? "?category=" + encodedCategory : "");
+
+        URL url = new URL(triviaApiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         connection.setRequestProperty("X-Api-key",apiKey);
@@ -49,7 +54,7 @@ public class TriviaService {
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         TriviaDTO[] triviaDto = mapper.readValue(responseStream, TriviaDTO[].class);
 
-        return triviaDto;
+        return triviaDto[0];
     }
 
     public void getTriviaFromAPI() throws IOException {
