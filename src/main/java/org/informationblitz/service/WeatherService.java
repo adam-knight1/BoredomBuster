@@ -22,9 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class WeatherService {
-
     private static final Logger logger = LoggerFactory.getLogger(WeatherService.class);
-
 
     public WeatherDTO getWeatherFromAPI(String type, String value, String state) throws IOException {
         System.out.println("getWeatherFromAPI called with type: " + type + ", value: " + value + ", state: " + state);

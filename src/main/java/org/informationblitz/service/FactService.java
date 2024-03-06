@@ -22,7 +22,7 @@ public class FactService {
 
             URL url = new URL("https://api.api-ninjas.com/v1/facts?limit="+numOfFacts);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("X-Api-key", "iksW+ahtgKdZfdUHvWXGXA==Tv4PHnyj3CpuUHQP");
+            connection.setRequestProperty("X-Api-key", "x");
             connection.setRequestProperty("accept", "application/json");
             InputStream responseStream = connection.getInputStream();
             ObjectMapper mapper = new ObjectMapper();
