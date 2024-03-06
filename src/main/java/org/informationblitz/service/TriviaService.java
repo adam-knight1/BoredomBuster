@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.informationblitz.dto.DogDTO;
 import org.informationblitz.dto.TriviaDTO;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.imageio.IIOException;
@@ -18,6 +19,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
+@Service
 public class TriviaService {
     public String triviaQuestion;
     public String[] categories = {"music", "mathematics", "geography", "sciencenature",
