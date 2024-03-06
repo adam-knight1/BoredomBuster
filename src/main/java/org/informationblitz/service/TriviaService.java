@@ -1,6 +1,8 @@
 package org.informationblitz.service;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.informationblitz.dto.DogDTO;
 import org.informationblitz.dto.TriviaDTO;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,13 +31,17 @@ public class TriviaService {
         //append category to URL
         //open connection and set key
         //return TriviaDTO with random trivia question
-
-
         URL url = new URL("https://api.api-ninjas.com/v1/dogs?name=" + category);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection()
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         connection.setRequestProperty("X-Api-key",apiKey);
         connection.setRequestProperty("accept", "application/json");;
+
+        InputStream responseStream = connection.getInputStream();
+        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        TriviaDTO[] triviaDto = mapper.readValue(responseStream, TriviaDTO[].class);
+
+
 
         return new TriviaDTO();
     }
