@@ -16,6 +16,11 @@ public class TriviaService {
             "general", "entertainment", "toysgames", "peopleplaces"};
     Scanner scanner = new Scanner(System.in);
 
+    public TriviaDTO getTrivia (String category) {
+
+        return new TriviaDTO();
+    }
+
     public void getTriviaFromAPI() throws IOException {
         String catChoice = "";
         boolean isValidCategory = false;
@@ -45,7 +50,7 @@ public class TriviaService {
             try {
                 URL url = new URL("https://api.api-ninjas.com/v1/trivia?category=" + catChoice);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("X-Api-Key", "iksW+ahtgKdZfdUHvWXGXA==Tv4PHnyj3CpuUHQP");
+                connection.setRequestProperty("X-Api-Key", "x"); //encapsulating
                 connection.setRequestProperty("accept", "application/json");
                 InputStream responseStream = connection.getInputStream();
                 int playerScore = 0;

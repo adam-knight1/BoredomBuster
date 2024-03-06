@@ -24,7 +24,7 @@ public class TriviaController {
             TriviaDTO trivia = TriviaService.getTrivia(category);
             return ResponseEntity.ok(trivia);
         } catch (ResponseStatusException e) {
-            return ResponseEntity.status(e.getStatus()).body(null);
+            return ResponseEntity.status(e.getStatus()).body(null); //this sends a null body back as an exception was caught
         }
     }
 }
