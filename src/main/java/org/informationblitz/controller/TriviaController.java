@@ -18,7 +18,7 @@ public class TriviaController {
     @Autowired
     private TriviaService triviaService;
 
-    @GetMapping("/dogs")
+    @GetMapping("/trivia")
     public ResponseEntity<TriviaDTO> getTriviaQuestion(@RequestParam String category) {
         try {
             TriviaDTO trivia = TriviaService.getTrivia(category);

@@ -1,7 +1,6 @@
 package org.informationblitz.dto;
 
 public class TriviaDTO {
-    public String triviaQuestion;
     private String category;
     private String question;
     private String answer;
