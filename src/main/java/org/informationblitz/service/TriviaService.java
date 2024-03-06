@@ -44,17 +44,24 @@ public class TriviaService {
         URL url = new URL(triviaApiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-        connection.setRequestProperty("X-Api-key",apiKey);
+        connection.setRequestProperty("X-Api-key", apiKey);
         connection.setRequestProperty("accept", "application/json");
 
         int responseCode = connection.getResponseCode();
 
-        if (responseCode == HttpURLConnection.HTTP_OK){
-        InputStream responseStream = connection.getInputStream();
-        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        TriviaDTO[] triviaDto = mapper.readValue(responseStream, TriviaDTO[].class);
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            InputStream responseStream = connection.getInputStream();
+            ObjectMapper mapper = new ObjectMapper();
+            TriviaDTO[] triviaArray = mapper.readValue(responseStream, TriviaDTO[].class);
 
-        return triviaDto[0];
+            if (triviaArray.length > 0) {
+                return triviaArray[0];
+            } else {
+                throw new IOException("No trivia found for entered category: " + category);
+            }
+        } else {
+            throw new IOException("Response not 200 OK in getTrivia" + responseCode);
+        }
     }
 
     public void getTriviaFromAPI() throws IOException {
