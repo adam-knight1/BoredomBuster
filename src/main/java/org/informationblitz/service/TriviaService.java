@@ -81,7 +81,6 @@ public class TriviaService {
                 triviaQuestion = ("Failed to fetch trivia");
                 e.printStackTrace();
             }
-
         }
     }
 }
