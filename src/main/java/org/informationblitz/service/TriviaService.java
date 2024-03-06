@@ -2,11 +2,15 @@ package org.informationblitz.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.informationblitz.dto.TriviaDTO;
+import org.springframework.web.client.RestTemplate;
 
+import javax.imageio.IIOException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.http.HttpHeaders;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -14,9 +18,24 @@ public class TriviaService {
     public String triviaQuestion;
     public String[] categories = {"music", "mathematics", "geography", "sciencenature",
             "general", "entertainment", "toysgames", "peopleplaces"};
+    private RestTemplate restTemplate = new RestTemplate();
     Scanner scanner = new Scanner(System.in);
+    String apiUrl = "https://api.api-ninjas.com/v1/trivia?category=";
+    String apiKey = System.getenv("API_KEY");
 
-    public TriviaDTO getTrivia (String category) {
+
+    public TriviaDTO getTrivia (String category) throws IOException {
+        //get category from controller
+        //append category to URL
+        //open connection and set key
+        //return TriviaDTO with random trivia question
+
+
+        URL url = new URL("https://api.api-ninjas.com/v1/dogs?name=" + category);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection()
+
+        connection.setRequestProperty("X-Api-key",apiKey);
+        connection.setRequestProperty("accept", "application/json");;
 
         return new TriviaDTO();
     }
