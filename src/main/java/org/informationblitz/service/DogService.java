@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class DogService {
     Scanner scanner = new Scanner(System.in);
 
-
     public DogDTO getDogInfoFromAPI(String breedName) throws IOException {
         String encodedBreedName = URLEncoder.encode(breedName, StandardCharsets.UTF_8.toString());
 
@@ -53,7 +52,7 @@ public class DogService {
 
         URL url = new URL("https://api.api-ninjas.com/v1/dogs?name=" + encodedDogBreed);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestProperty("X-Api-key", "iksW+ahtgKdZfdUHvWXGXA==Tv4PHnyj3CpuUHQP");
+        connection.setRequestProperty("X-Api-key", "x");
         connection.setRequestProperty("accept", "application/json");
 
         InputStream responseStream = connection.getInputStream();
