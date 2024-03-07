@@ -1,4 +1,4 @@
-package org.informationblitz;
+package org.boredombuster;
 
 
 import org.springframework.context.annotation.Bean;

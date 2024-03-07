@@ -1,8 +1,8 @@
-package org.informationblitz;
-import org.informationblitz.service.DogService;
-import org.informationblitz.service.FactService;
-import org.informationblitz.service.TriviaService;
-import org.informationblitz.service.WeatherService;
+package org.boredombuster;
+import org.boredombuster.service.DogService;
+import org.boredombuster.service.FactService;
+import org.boredombuster.service.TriviaService;
+import org.boredombuster.service.WeatherService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

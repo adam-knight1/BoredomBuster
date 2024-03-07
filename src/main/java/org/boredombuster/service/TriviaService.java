@@ -1,7 +1,7 @@
-package org.informationblitz.service;
+package org.boredombuster.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.informationblitz.dto.TriviaDTO;
+import org.boredombuster.dto.TriviaDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
