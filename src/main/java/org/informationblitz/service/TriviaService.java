@@ -1,24 +1,24 @@
 package org.informationblitz.service;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.informationblitz.dto.DogDTO;
 import org.informationblitz.dto.TriviaDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.net.http.HttpHeaders;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/** TriviaService contains several methods that are used to interact with an external api, returning
+ * data via TriviaDTO that is displayed to the user.  In its original implementation as a CLI application,
+ * IO operations and user interaction was primarily handled here.  After migrating the project to Spring boot,
+ * the UI is handled through the TriviaController and the front end logic in the separate repository (see README)
+ */
 
 @Service
 public class TriviaService {
@@ -30,14 +30,15 @@ public class TriviaService {
     String apiUrl = "https://api.api-ninjas.com/v1/trivia?category=";
 
 
+    /** This method takes the logic from the previous CLI implementation of this app, and packages it in a way that interacts
+     * with the trivia controller, which handles the API routing and IO operations from the frontend
+     * @param category
+     * @return
+     * @throws IOException
+     */
+
     public TriviaDTO getTrivia (String category) throws IOException {
-        //get category from controller
-        //append category to URL
-        //open connection and set key
-        //return TriviaDTO with random trivia question
-
         String apiKey = System.getenv("API_KEY");
-
 
         if (apiKey == null || apiKey.trim().isEmpty()) {
             throw new IllegalStateException("API key for trivia is not set");
@@ -68,6 +69,12 @@ public class TriviaService {
             throw new IOException("Response not 200 OK in getTrivia" + responseCode);
         }
     }
+
+    /** The method below was my original implementation for the CLI interface before I migrated the project to spring.
+     * This service method controlled the user interaction and interface with the external API,
+     * returning randomized trivia questions, and providing feedback based on correct and incorrect answers.
+     * @throws IOException
+     */
 
     public void getTriviaFromAPI() throws IOException {
         String catChoice = "";
