@@ -1,24 +1,18 @@
 package org.informationblitz.service;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.informationblitz.dto.DogDTO;
 import org.informationblitz.dto.TriviaDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.net.http.HttpHeaders;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Scanner;
-
 
 @Service
 public class TriviaService {
@@ -37,7 +31,6 @@ public class TriviaService {
         //return TriviaDTO with random trivia question
 
         String apiKey = System.getenv("API_KEY");
-
 
         if (apiKey == null || apiKey.trim().isEmpty()) {
             throw new IllegalStateException("API key for trivia is not set");
@@ -68,6 +61,12 @@ public class TriviaService {
             throw new IOException("Response not 200 OK in getTrivia" + responseCode);
         }
     }
+
+    /** The method below was my original implementation for the CLI interface before I migrated the project to spring.
+     * This service method controlled the user interaction and interface with the external API
+     * Returning randomized trivia questions, and providing feedback based on correct and incorrect answers.
+     * @throws IOException
+     */
 
     public void getTriviaFromAPI() throws IOException {
         String catChoice = "";
