@@ -1,7 +1,7 @@
 # BoredomBuster Backend
 
 BoredomBuster is an interactive backend application built using Spring, designed to serve a variety of informational and entertaining APIs. 
-It powers the frontend React/Next.js application, which can be found [here](https://github.com/1/adam-knight1/boredombusterfrontend).
+It powers the frontend React/Next.js application, which can be found [here](https://github.com/adam-knight1/boredombusterfrontend).
 
 ## Current Features
 
@@ -14,7 +14,7 @@ It powers the frontend React/Next.js application, which can be found [here](http
 ## Frontend Application
 
 The frontend for BoredomBuster is a React/Next.js application that consumes the APIs provided by this backend. 
-You can start the frontend locally by running `npm run dev` if you have the repository cloned, or visit [BoredomBusterFrontend](https://github.com/1/adam-knight1/boredombusterfrontend) for more details.
+You can start the frontend locally by running `npm run dev` if you have the repository cloned, or visit [BoredomBusterFrontend](https://github.com/adam-knight1/boredombusterfrontend) for more details.
 
 ## Getting Started
 
