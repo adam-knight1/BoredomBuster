@@ -1,1 +1,0 @@
-#BoredomBuster's frontend has been expanded into a second repo, serviced by React/Next.Js
