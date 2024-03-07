@@ -28,7 +28,6 @@ public class TriviaService {
     private RestTemplate restTemplate = new RestTemplate();
     Scanner scanner = new Scanner(System.in);
     String apiUrl = "https://api.api-ninjas.com/v1/trivia?category=";
-    String apiKey = System.getenv("API_KEY");
 
 
     public TriviaDTO getTrivia (String category) throws IOException {
@@ -36,6 +35,9 @@ public class TriviaService {
         //append category to URL
         //open connection and set key
         //return TriviaDTO with random trivia question
+
+        String apiKey = System.getenv("API_KEY");
+
 
         if (apiKey == null || apiKey.trim().isEmpty()) {
             throw new IllegalStateException("API key for trivia is not set");
