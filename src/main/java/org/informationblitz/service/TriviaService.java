@@ -14,6 +14,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/** TriviaService contains several methods that are used to interact with an external api, returning
+ * data via TriviaDTO that is displayed to the user.  In its original implementation as a CLI application,
+ * IO operations and user interaction was primarily handled here.  After migrating the project to Spring boot,
+ * the UI is handled through the TriviaController and the front end logic in the separate repository (see README)
+ */
+
 @Service
 public class TriviaService {
     public String triviaQuestion;
@@ -24,12 +30,14 @@ public class TriviaService {
     String apiUrl = "https://api.api-ninjas.com/v1/trivia?category=";
 
 
-    public TriviaDTO getTrivia (String category) throws IOException {
-        //get category from controller
-        //append category to URL
-        //open connection and set key
-        //return TriviaDTO with random trivia question
+    /** This method takes the logic from the previous CLI implementation of this app, and packages it in a way that interacts
+     * with the trivia controller, which handles the API routing and IO operations from the frontend
+     * @param category
+     * @return
+     * @throws IOException
+     */
 
+    public TriviaDTO getTrivia (String category) throws IOException {
         String apiKey = System.getenv("API_KEY");
 
         if (apiKey == null || apiKey.trim().isEmpty()) {
@@ -63,8 +71,8 @@ public class TriviaService {
     }
 
     /** The method below was my original implementation for the CLI interface before I migrated the project to spring.
-     * This service method controlled the user interaction and interface with the external API
-     * Returning randomized trivia questions, and providing feedback based on correct and incorrect answers.
+     * This service method controlled the user interaction and interface with the external API,
+     * returning randomized trivia questions, and providing feedback based on correct and incorrect answers.
      * @throws IOException
      */
 
