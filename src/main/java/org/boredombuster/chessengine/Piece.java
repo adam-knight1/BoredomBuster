@@ -6,5 +6,7 @@ public abstract class Piece {
     protected boolean isWhite;
 
 
+    public Piece(int positionX, int positionY, boolean isWhite) {
 
+    }
 }
