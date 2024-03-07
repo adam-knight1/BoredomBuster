@@ -1,8 +1,8 @@
-package org.informationblitz.service;
+package org.boredombuster.service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.informationblitz.dto.DogDTO;
+import org.boredombuster.dto.DogDTO;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

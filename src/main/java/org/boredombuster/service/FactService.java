@@ -1,4 +1,4 @@
-package org.informationblitz.service;
+package org.boredombuster.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
