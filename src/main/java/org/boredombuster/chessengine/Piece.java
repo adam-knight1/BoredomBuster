@@ -7,9 +7,7 @@ public abstract class Piece {
     protected int positionY;
     protected boolean isWhite;
 
-    public Piece(int positionX, int positionY, boolean isWhite) {
-        this.positionX = positionX;
-        this.positionY = positionY;
+    public Piece(boolean isWhite) {
         this.isWhite = isWhite;
     }
 
