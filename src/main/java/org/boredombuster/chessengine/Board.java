@@ -1,5 +1,7 @@
 package org.boredombuster.chessengine;
 
+import org.boredombuster.chessengine.piecelogic.Pawn;
+
 public class Board {
     private Piece[][] board;
     private Boolean whiteTurn = true;
@@ -10,7 +12,7 @@ public class Board {
 
     private void setupBoard() {
         for (int i = 0; i < 8; i++) {
-            board[1][i] = new pawn(1,i,true);
+            board[1][i] = new Pawn(1,i,true);
         }
     }
 }
