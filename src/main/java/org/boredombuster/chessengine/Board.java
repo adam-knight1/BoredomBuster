@@ -10,34 +10,37 @@ public class Board {
         this.board = new Piece[8][8];
     }
 
+    /** The pieces are placed in their respective starting positions in the following setup method
+     *
+     */
     private void setupBoard() {
 
-        //initializing the white pawns on row 1
+        //initializing the white pawns row 1
         for (int i = 0; i < 8; i++) {
-            board[1][i] = new Pawn(1, i, true);
+            board[1][i] = new Pawn(true);
         }
         //initializing the black pawns on row 6
 
         for (int i = 0; i < 8; i++) {
-            board[6][i] = new Pawn(6, i, false);
+            board[6][i] = new Pawn(false);
         }
 
-        //white rooks
+        //White rooks
 
-        board[0][0] = new Rook(0, 0, true);
-        board[0][7] = new Rook(0, 7, true);
+        board[0][0] = new Rook(true);
+        board[0][7] = new Rook(true);
 
-        // black rooks
+        // Black rooks
 
-        board[7][0] = new Rook(7, 0, false);
-        board[7][7] = new Rook(7, 7, false);
+        board[7][0] = new Rook( false);
+        board[7][7] = new Rook(false);
 
 
-        //white knights
+        //White knights
         board[0][1] = new Knight(true);
         board[0][6] = new Knight(true);
 
-        //black knights
+        //Black knights
         board[7][1] = new Knight(false);
         board[7][6] = new Knight(false);
 
