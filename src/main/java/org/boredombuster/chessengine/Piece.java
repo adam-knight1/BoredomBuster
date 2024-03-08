@@ -14,11 +14,13 @@ public abstract class Piece {
     /** Determine if the move is valid based on piece movement rules.
      *
      * @param board
+     * @param startX
+     * @param startY
      * @param destinationX
      * @param destinationY
      * @return
      */
-    public abstract boolean isValidMove(Board board, int destinationX, int destinationY);
+    public abstract boolean isValidMove(Board board, int startX, int startY, int destinationX, int destinationY);
 
     public boolean isWhite() {
         return isWhite;
