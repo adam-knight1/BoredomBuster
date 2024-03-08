@@ -1,4 +1,4 @@
-package org.informationblitz.dto;
+package org.boredombuster.dto;
 
 public class TriviaDTO {
     private String category;

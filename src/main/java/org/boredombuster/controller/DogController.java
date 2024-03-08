@@ -1,7 +1,7 @@
-package org.informationblitz.controller;
+package org.boredombuster.controller;
 
-import org.informationblitz.dto.DogDTO;
-import org.informationblitz.service.DogService;
+import org.boredombuster.dto.DogDTO;
+import org.boredombuster.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

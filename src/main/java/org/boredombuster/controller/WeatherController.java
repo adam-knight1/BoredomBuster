@@ -1,9 +1,7 @@
-package org.informationblitz.controller;
+package org.boredombuster.controller;
 
-import org.informationblitz.dto.DogDTO;
-import org.informationblitz.dto.WeatherDTO;
-import org.informationblitz.service.DogService;
-import org.informationblitz.service.WeatherService;
+import org.boredombuster.dto.WeatherDTO;
+import org.boredombuster.service.WeatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/weather")

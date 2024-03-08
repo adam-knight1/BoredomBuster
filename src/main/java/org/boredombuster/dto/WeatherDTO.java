@@ -1,4 +1,4 @@
-package org.informationblitz.dto;
+package org.boredombuster.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
