@@ -1,14 +1,12 @@
 package org.boredombuster.chessengine;
 
-import org.boredombuster.chessengine.piecelogic.Knight;
-import org.boredombuster.chessengine.piecelogic.Pawn;
-import org.boredombuster.chessengine.piecelogic.Rook;
+import org.boredombuster.chessengine.piecelogic.*;
 
 public class Board {
     private Piece[][] board;
     private Boolean whiteTurn = true;
 
-    public Board(){
+    public Board() {
         this.board = new Piece[8][8];
     }
 
@@ -36,8 +34,29 @@ public class Board {
 
 
         //white knights
-        board[0][1] = new Rook(0,1,true);
-        board[0][6] = new Rook(0,6,true);
+        board[0][1] = new Knight(true);
+        board[0][6] = new Knight(true);
+
+        //black knights
+        board[7][1] = new Knight(false);
+        board[7][6] = new Knight(false);
+
+        // White bishops
+        board[0][2] = new Bishop(true);
+        board[0][5] = new Bishop(true);
+
+        // Black bishops
+        board[7][2] = new Bishop(false);
+        board[7][5] = new Bishop(false);
+
+        // White queen and king
+        board[0][3] = new Queen(true);
+        board[0][4] = new King(true);
+
+        // Black queen and king
+        board[7][3] = new Queen(false);
+        board[7][4] = new King(false);
     }
-    }
+}
+
 
