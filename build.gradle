@@ -19,12 +19,11 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web' // For web applications
+    implementation 'org.springframework.boot:spring-boot-starter-webflux' //to use webclient instead of Rest Tempalte
     //implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1' // For JSON handling
     //implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // For JPA repositories
     //I need to update application.properties and application.yml with database info when I incorporate dynamoDB or other
    // implementation 'org.springframework.boot:spring-boot-starter-security' // For Spring Security, will set up later
-
-
 
     // JUnit Jupiter API afor writing tests
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
@@ -32,8 +31,6 @@ dependencies {
 
     // Spring Boot starter test for testing spring stuff
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-
 
 }
 
