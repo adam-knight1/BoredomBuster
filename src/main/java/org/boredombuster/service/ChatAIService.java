@@ -23,8 +23,4 @@ public class ChatAIService {
                 .bodyToMono(String.class)
                 .onErrorReturn("Error calling the OpenAI API");
     }
-
-        return "";
-
-    }
 }
