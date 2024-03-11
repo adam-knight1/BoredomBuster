@@ -20,7 +20,6 @@ public class DogController {
         this.dogService = dogService;
     }
 
-
     @GetMapping("/dog")
     public ResponseEntity<DogDTO> getDogInfo(@RequestParam String breedName) throws IOException {
         try {
