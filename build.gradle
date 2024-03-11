@@ -13,9 +13,9 @@ java {
 }
 
 
-application {
+/*application {
     mainClassName = 'org.boredombuster.BoredomBusterApplication'
-}
+}*/
 
 
 
