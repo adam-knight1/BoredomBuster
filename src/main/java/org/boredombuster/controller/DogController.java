@@ -14,7 +14,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/dogs")
 public class DogController {
-
     @Autowired
     private DogService dogService;
 
