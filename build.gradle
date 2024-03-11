@@ -42,7 +42,6 @@ dependencies {
 
 }
 
-
 task stage(dependsOn: ['bootJar', 'clean']) {
     doLast {
         println 'Staging the application...'
