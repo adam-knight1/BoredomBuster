@@ -1,3 +1,10 @@
+/build/
+/out/
 .gradle/
+*.jar
+.idea/
+*.iml
+.DS_Store
+
 build/libs/BoredomBuster-*.jar
 build/libs/PriceTrackerApp-*.jar

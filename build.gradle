@@ -16,6 +16,15 @@ repositories {
     mavenCentral()
 }
 
+bootJar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.boredombuster.BoredomBusterApplication'
+        )
+    }
+}
+
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web' // For web applications
     implementation 'org.springframework.boot:spring-boot-starter-webflux' //to use webclient instead of Rest Tempalte
@@ -39,7 +48,6 @@ task stage(dependsOn: ['bootJar', 'clean']) {
         println 'Staging the application...'
     }
 }
-
 
 test {
     useJUnitPlatform()
