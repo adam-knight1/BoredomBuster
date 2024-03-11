@@ -1,1 +1,3 @@
 .gradle/
+build/libs/BoredomBuster-*.jar
+build/libs/PriceTrackerApp-*.jar
