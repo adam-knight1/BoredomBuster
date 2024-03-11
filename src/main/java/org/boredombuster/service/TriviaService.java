@@ -90,6 +90,7 @@ public class TriviaService {
 
             if (!isValidCategory) {
                 System.out.println(catChoice + " is an invalid selection.");
+
                 System.out.println("Please choose from the following available categories: ");
                 System.out.println(Arrays.toString(categories));
             }

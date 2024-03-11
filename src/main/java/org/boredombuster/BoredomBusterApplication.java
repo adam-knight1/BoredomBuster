@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.Scanner;
 @SpringBootApplication
 public class BoredomBusterApplication {
-
     static TriviaService triviaService = new TriviaService();
     static WeatherService weatherService = new WeatherService();
     static FactService factService = new FactService();
@@ -22,6 +21,8 @@ public class BoredomBusterApplication {
     public static void main(String[] args) throws IOException {
 
         SpringApplication.run(BoredomBusterApplication.class, args);
+
+        //This was the initial logic for the CLI application before migrating it to Spring framework
 
         /*while (true) {
             System.out.println("Welcome to the BoredomBuster app!");

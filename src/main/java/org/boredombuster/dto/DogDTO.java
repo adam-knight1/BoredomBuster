@@ -2,7 +2,6 @@ package org.boredombuster.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 public class DogDTO {
     @JsonProperty("name")
     private String name;

@@ -6,6 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+
+/** This class is used to configure cross origin referencing, so that this backend repo
+ * can connect with the front end repo.
+ */
 @Configuration
 public class WebConfig {
     @Bean
