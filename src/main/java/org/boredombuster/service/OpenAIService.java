@@ -13,6 +13,7 @@ import reactor.core.publisher.Mono;
 public class OpenAIService {
     private String apiKey = System.getenv("OPENAI_API_KEY");
     private final WebClient webClient;
+    //testing heroku deployment
 
     public OpenAIService(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder.baseUrl("https://api.openai.com/v1").build();
