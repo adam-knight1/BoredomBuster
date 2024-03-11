@@ -1,4 +1,3 @@
-/*
 package org.boredombuster.controller;
 
 import org.boredombuster.dto.DogDTO;
@@ -32,4 +31,4 @@ public class DogController {
         }
     }
 }
-*/
+
