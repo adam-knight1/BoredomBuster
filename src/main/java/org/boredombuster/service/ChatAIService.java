@@ -26,7 +26,7 @@ public class ChatAIService {
         return this.webClient.post()
                 .uri(modelEndpoint)
                 .header("Authorization", "Bearer " + apiKey)
-                //.header("OpenAI-Organization", this.)
+                //.header(, this.)
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(requestBody)
                 .retrieve()
