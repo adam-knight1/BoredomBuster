@@ -19,7 +19,7 @@ repositories {
 bootJar {
     manifest {
         attributes(
-                'Main-Class': 'boredombuster.BoredomBusterApplication'
+                'Main-Class': 'org.boredombuster.BoredomBusterApplication'
         )
     }
 }
