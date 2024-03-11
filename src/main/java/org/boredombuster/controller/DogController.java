@@ -16,7 +16,6 @@ import java.io.IOException;
 public class DogController {
     @Autowired
     private DogService dogService;
-
     public DogController(DogService dogService) {
         this.dogService = dogService;
     }
