@@ -16,13 +16,13 @@ repositories {
     mavenCentral()
 }
 
-bootJar {
+/*bootJar {
     manifest {
         attributes(
                 'Main-Class': 'org.boredombuster.BoredomBusterApplication'
         )
     }
-}
+}*/
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web' // For web applications
