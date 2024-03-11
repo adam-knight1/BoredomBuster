@@ -24,7 +24,6 @@ bootJar {
     }
 }
 
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web' // For web applications
     implementation 'org.springframework.boot:spring-boot-starter-webflux' //to use webclient instead of Rest Tempalte
