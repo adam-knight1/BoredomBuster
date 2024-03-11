@@ -6,6 +6,7 @@ public class DogDTO {
     @JsonProperty("name")
     private String name;
 
+
     @JsonProperty("grooming")
     private String grooming;
 
