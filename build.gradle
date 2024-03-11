@@ -13,6 +13,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_16
 }
 
+
 application {
     mainClassName = 'org.boredombuster.BoredomBusterApplication'
 }
