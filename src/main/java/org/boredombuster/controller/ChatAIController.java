@@ -15,7 +15,6 @@ import reactor.core.publisher.Mono;
 public class ChatAIController {
     @Autowired
     OpenAIService openAIService;
-
     public ChatAIController(OpenAIService openAIService) {
         this.openAIService = openAIService;
     }
