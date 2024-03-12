@@ -17,7 +17,7 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**").allowedOrigins("https://boredom-buster-frontend-e4kfrj1k1-adam-knight1s-projects.vercel.app");
+                registry.addMapping("/api/**").allowedOrigins("*");
             }
         };
     }
