@@ -46,7 +46,6 @@ public class ChessEngineService {
                 break;
             }
         }
-
         //may need to set more command options here?
 
         sendCommand("isReady");
