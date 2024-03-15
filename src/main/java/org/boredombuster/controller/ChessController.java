@@ -32,7 +32,6 @@ public class ChessController {
             return ResponseEntity.badRequest().body("failed to start game: " + e.getMessage());
         }
     }*/
-
     @PostMapping("/start")
     public ResponseEntity<String> startGame() {
         try {
