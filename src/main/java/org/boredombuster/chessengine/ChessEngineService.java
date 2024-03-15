@@ -20,6 +20,8 @@ public class ChessEngineService {
     private Process engineProcess;
     private BufferedReader reader;
     private BufferedWriter writer;
+
+    private String hardCodePath = "./bin/stockfish";
     @Value("${stockfish.path}")
     private String stockfishPath;
 
@@ -31,7 +33,7 @@ public class ChessEngineService {
      * @throws IOException
      */
     public void startEngine() throws IOException {
-        ProcessBuilder builder = new ProcessBuilder(stockfishPath);
+        ProcessBuilder builder = new ProcessBuilder(hardCodePath);
         this.engineProcess = builder.start(); //start the engine
         this.reader = new BufferedReader(new InputStreamReader(engineProcess.getInputStream()));
         this.writer = new BufferedWriter(new OutputStreamWriter(engineProcess.getOutputStream()));
