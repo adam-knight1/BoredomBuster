@@ -12,7 +12,6 @@ import java.io.*;
  */
 @Service
 public class ChessEngineService {
-
     //referenced the documentation here to understand UCI protocol
     //https://gist.github.com/DOBRO/2592c6dad754ba67e6dcaec8c90165bf
 
@@ -20,7 +19,6 @@ public class ChessEngineService {
     private Process engineProcess;
     private BufferedReader reader;
     private BufferedWriter writer;
-
     private String hardCodePath = "./bin/stockfish";
     @Value("${stockfish.path}")
     private String stockfishPath;
