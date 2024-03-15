@@ -3,6 +3,7 @@ package org.boredombuster.chessengine;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.*;
 
@@ -22,6 +23,17 @@ public class ChessEngineService {
     private String hardCodePath = "./bin/stockfish";
     @Value("${stockfish.path}")
     private String stockfishPath;
+
+
+
+    @PostConstruct // This should start it once at bean creation when spring boots up.
+    public void init() {
+        try {
+            startEngine();
+        } catch (IOException e) {
+            System.err.println("Failed to start the Stockfish engine: " + e.getMessage());
+        }
+    }
     /**
      * Method to start the stockfish engine
      * Configures the engine, sends UCI command to set up stockfish with UCI protocol

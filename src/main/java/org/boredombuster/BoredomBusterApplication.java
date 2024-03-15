@@ -5,10 +5,12 @@ import org.boredombuster.service.TriviaService;
 import org.boredombuster.service.WeatherService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.io.IOException;
 import java.util.Scanner;
 @SpringBootApplication
+@EnableAsync //to be able to start the chess engine async
 public class BoredomBusterApplication {
     static TriviaService triviaService = new TriviaService();
     static WeatherService weatherService = new WeatherService();
