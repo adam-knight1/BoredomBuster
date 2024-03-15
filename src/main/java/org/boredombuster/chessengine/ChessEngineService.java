@@ -1,13 +1,13 @@
 package org.boredombuster.chessengine;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PreDestroy;
 import java.io.*;
 
-/** This class will help to integrate the stockfish chess engine into the app
+/**
+ * This class will help to integrate the stockfish chess engine into the app
  * It contains methods for reading and writing commands to/from the stockfish engine, and starting/stopping the engine
  */
 @Service
@@ -23,7 +23,8 @@ public class ChessEngineService {
     @Value("${stockfish.path}")
     private String stockfishPath;
 
-    /** Method to start the stockfish engine
+    /**
+     * Method to start the stockfish engine
      * Configures the engine, sends UCI command to set up stockfish with UCI protocol
      * Checks response for UCI OK and successful engine start
      *
@@ -54,7 +55,8 @@ public class ChessEngineService {
         }
     }
 
-    /** read output from engine
+    /**
+     * Read output from engine
      *
      * @return
      * @throws IOException
@@ -72,15 +74,18 @@ public class ChessEngineService {
         return output.toString();
     }
 
-    /** Stop the stockfish engine **/
+    /**
+     * Stop the stockfish engine
+     **/
     @PreDestroy
     public void stopEngine() {
-        if (engineProcess == null) {
+        if (engineProcess != null) {
             engineProcess.destroy();
         }
     }
 
-    /** send commands to stockfish service
+    /**
+     * Send commands to stockfish service
      *
      * @param command
      * @throws IOException
@@ -91,30 +96,43 @@ public class ChessEngineService {
         writer.flush();
     }
 
+    /**
+     * Sets up the board with a given position.
+     *
+     * @param moves A string representing the moves made from the start position, separated by spaces.
+     *              For example, "e2e4 e7e5" sets up board with those moves made from the starting position.
+     * @throws IOException If there's an error communicating with the Stockfish process.
+     */
 
-        //setting up the board
-
-        public void setupBoard (String moves) throws IOException {
+    public void setupBoard(String moves) throws IOException {
         sendCommand("position startpos moves"); //starting from standard chess position
 
-            //I may not need this second ready check
-            String line;
-            sendCommand("isReady");
-            while ((line = reader.readLine()) != null) {
-                if (line.equals("readyok")) {
-                    break;  //stockfish fully initialized, ready to go
-                }
+        //I may not need this second ready check
+        String line;
+        sendCommand("isReady");
+        while ((line = reader.readLine()) != null) {
+            if (line.equals("readyok")) {
+                break;  //stockfish fully initialized, ready to go
             }
         }
+    }
 
-        public String calculateBestMove(int depth) throws IOException {
+    /**
+     * Asks Stockfish to calculate the best move based on the current board state.
+     *
+     * @param depth The depth of the search. Higher values increase calculation time but improve accuracy.
+     * @return The best move as calculated by Stockfish.
+     * @throws IOException If there's an error communicating with the Stockfish process.
+     */
+
+    public String calculateBestMove(int depth) throws IOException {
         sendCommand("go depth" + depth); //this depth should set how far ahead stockfish looks for move analysis.
-            // More moves ahead is harder but requires more computation time.
+        // More moves ahead is harder but requires more computation time.
 
-            return readOutputUntilBestMove(); //
-        }
+        return readOutputUntilBestMove(); //
+    }
 
-        private String readOutputUntilBestMove() throws IOException {
+    private String readOutputUntilBestMove() throws IOException {
         String line;
         String bestMove = null;
 
@@ -125,6 +143,6 @@ public class ChessEngineService {
             }
         }
         return bestMove;
-        }
     }
+}
 
