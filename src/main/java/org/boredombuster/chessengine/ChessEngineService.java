@@ -45,9 +45,19 @@ public class ChessEngineService {
     }
 
     public String readOutput() throws IOException {
+        StringBuilder output = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            output.append(line).append("\n");
 
-        return "";
+            if (line.contains("bestmove")) {
+                break;
+            }
+        }
+
+        return output.toString();
     }
+
 
     public void stopEngine() {
 
