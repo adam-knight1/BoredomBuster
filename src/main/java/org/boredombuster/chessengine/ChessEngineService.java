@@ -13,6 +13,9 @@ import java.io.*;
 @Service
 public class ChessEngineService {
 
+    //referenced the documentation here to understand UCI protocol
+    //https://gist.github.com/DOBRO/2592c6dad754ba67e6dcaec8c90165bf
+
     //initializing stockfish and UCI components
     private Process engineProcess;
     private BufferedReader reader;
@@ -104,17 +107,20 @@ public class ChessEngineService {
             }
         }
 
-        public void calculateBestMove(int depth) throws IOException {
-        sendCommand("go depth" + depth);
+        public String calculateBestMove(int depth) throws IOException {
+        sendCommand("go depth" + depth); //this depth should set how far ahead stockfish looks for move analysis.
+            // More moves ahead is harder but requires more computation time.
+
+            return readOutputUntilBestMove(); //
         }
 
         private String readOutputUntilBestMove() throws IOException {
         String line;
         String bestMove = null;
 
-        while ((line = reader.readLine()) != null) {
-            if (line.startsWith("bestMove")) {
-                bestMove = line.split(" ")[1];
+        while ((line = reader.readLine()) != null) { //will read lines of output from SF until no more lines
+            if (line.startsWith("bestMove")) { //potential for error with camelCase
+                bestMove = line.split(" ")[1]; //this should break up the response into array of strings and pull the 2nd index, which is the move
                 break;
             }
         }
