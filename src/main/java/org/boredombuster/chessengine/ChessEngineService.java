@@ -22,7 +22,6 @@ public class ChessEngineService {
     private String hardCodePath = "./bin/stockfish";
     @Value("${stockfish.path}")
     private String stockfishPath;
-
     /**
      * Method to start the stockfish engine
      * Configures the engine, sends UCI command to set up stockfish with UCI protocol
