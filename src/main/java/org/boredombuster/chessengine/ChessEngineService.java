@@ -23,5 +23,31 @@ public class ChessEngineService {
         this.reader = new BufferedReader(new InputStreamReader(engineProcess.getInputStream()));
         this.writer = new BufferedWriter(new OutputStreamWriter(engineProcess.getOutputStream()));
 
+        sendCommand("uci"); //telling stockfish to use UCI protocol (Universal Chess Interface)
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (line.equals("uciok")) { //response UCI OK, stockfish ready in UCI mode
+                break;
+            }
+        }
+
+        //may need to set more command options here?
+
+        sendCommand("isReady");
+        while ((line = reader.readLine()) != null) {
+            if (line.equals("readyok")) {
+                break;  //stockfish fully initialized, ready to go
+            }
+        }
+
+    }
+
+    public void sendCommand(String command) throws IOException {
+        writer.write(command);
+        writer.newLine();
+        writer.flush();
+
+
     }
 }
