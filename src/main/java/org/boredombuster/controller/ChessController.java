@@ -26,7 +26,7 @@ public class ChessController {
     @PostMapping("/start")
     public ResponseEntity<String> startGame() {
         try {
-            chessEngineService.startEngine();
+            chessEngineService.startEngine(); //this may be redundant depending on how I want to handle in service
             return ResponseEntity.ok("Chess engine started success");
         } catch (IOException e) {
             return ResponseEntity.badRequest().body("failed to start game: " + e.getMessage());
@@ -34,7 +34,7 @@ public class ChessController {
     }
 
     /** Calls setup board with current positioning and calls best move method in service with depth
-     * Depth = moves that SF is looked ahead for analysis of best move
+     * Depth specifies how many moves ahead stockfish will look to calculate best move
      * @param moves
      * @param depth
      * @return Response with best more or failed to calculate move response
