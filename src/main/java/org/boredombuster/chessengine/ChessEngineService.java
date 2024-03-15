@@ -20,6 +20,7 @@ public class ChessEngineService {
 
     public void startEngine() throws IOException {
         ProcessBuilder builder = new ProcessBuilder(stockfishPath);
+        this.engineProcess = builder.start(); //start the engine
         this.reader = new BufferedReader(new InputStreamReader(engineProcess.getInputStream()));
         this.writer = new BufferedWriter(new OutputStreamWriter(engineProcess.getOutputStream()));
 
@@ -40,6 +41,15 @@ public class ChessEngineService {
                 break;  //stockfish fully initialized, ready to go
             }
         }
+
+    }
+
+    public String readOutput() throws IOException {
+
+        return "";
+    }
+
+    public void stopEngine() {
 
     }
 
