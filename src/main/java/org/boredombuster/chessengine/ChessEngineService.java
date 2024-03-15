@@ -105,11 +105,11 @@ public class ChessEngineService {
      */
 
     public void setupBoard(String moves) throws IOException {
-        sendCommand("position startpos moves"); //starting from standard chess position
+        sendCommand("position startpos moves" + moves); //starting from standard chess position
 
         //I may not need this second ready check
         String line;
-        sendCommand("isReady");
+        sendCommand("isready");
         while ((line = reader.readLine()) != null) {
             if (line.equals("readyok")) {
                 break;  //stockfish fully initialized, ready to go
@@ -126,9 +126,8 @@ public class ChessEngineService {
      */
 
     public String calculateBestMove(int depth) throws IOException {
-        sendCommand("go depth" + depth); //this depth should set how far ahead stockfish looks for move analysis.
+        sendCommand("go depth " + depth); //this depth should set how far ahead stockfish looks for move analysis.
         // More moves ahead is harder but requires more computation time.
-
         return readOutputUntilBestMove(); //
     }
 
@@ -137,7 +136,7 @@ public class ChessEngineService {
         String bestMove = null;
 
         while ((line = reader.readLine()) != null) { //will read lines of output from SF until no more lines
-            if (line.startsWith("bestMove")) { //potential for error with camelCase
+            if (line.startsWith("bestmove")) { //potential for error with camelCase
                 bestMove = line.split(" ")[1]; //this should break up the response into array of strings and pull the 2nd index, which is the move
                 break;
             }
