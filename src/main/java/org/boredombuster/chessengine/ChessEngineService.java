@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PreDestroy;
 import java.io.*;
 
-//This class will help to integrate the stockfish chess engine into the app
+/** This class will help to integrate the stockfish chess engine into the app
+ * It contains methods for reading and writing commands to/from the stockfish engine, and starting/stopping the engine
+ */
 @Service
 public class ChessEngineService {
 
@@ -17,7 +20,12 @@ public class ChessEngineService {
     @Value("${stockfish.path}")
     private String stockfishPath;
 
-
+    /** Method to start the stockfish engine
+     * Configures the engine, sends UCI command to set up stockfish with UCI protocol
+     * Checks response for UCI OK and successful engine start
+     *
+     * @throws IOException
+     */
     public void startEngine() throws IOException {
         ProcessBuilder builder = new ProcessBuilder(stockfishPath);
         this.engineProcess = builder.start(); //start the engine
@@ -41,9 +49,13 @@ public class ChessEngineService {
                 break;  //stockfish fully initialized, ready to go
             }
         }
-
     }
 
+    /** read output from engine
+     *
+     * @return
+     * @throws IOException
+     */
     public String readOutput() throws IOException {
         StringBuilder output = new StringBuilder();
         String line;
@@ -54,20 +66,26 @@ public class ChessEngineService {
                 break;
             }
         }
-
         return output.toString();
     }
 
-
+    /** Stop the stockfish engine **/
+    @PreDestroy
     public void stopEngine() {
-
+        if (engineProcess == null) {
+            engineProcess.destroy();
+        }
     }
 
+    /** send commands to stockfish service
+     *
+     * @param command
+     * @throws IOException
+     */
     public void sendCommand(String command) throws IOException {
         writer.write(command);
         writer.newLine();
         writer.flush();
-
 
     }
 }
