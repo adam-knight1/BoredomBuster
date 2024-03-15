@@ -86,6 +86,26 @@ public class ChessEngineService {
         writer.write(command);
         writer.newLine();
         writer.flush();
-
     }
-}
+
+
+        //setting up the board
+
+        public void setupBoard (String moves) throws IOException {
+        sendCommand("position startpos moves"); //starting from standard chess position
+
+            //I may not need this second ready check
+            String line;
+            sendCommand("isReady");
+            while ((line = reader.readLine()) != null) {
+                if (line.equals("readyok")) {
+                    break;  //stockfish fully initialized, ready to go
+                }
+            }
+        }
+
+        public void calculateBestMove(int depth) throws IOException {
+        sendCommand("go depth" + depth);
+        }
+    }
+
