@@ -153,5 +153,13 @@ public class ChessEngineService {
         }
         return bestMove;
     }
+
+    /** adding to test new controller method now that start logic has been moved to service
+     *
+     * @return Whether engine is null or alive
+     */
+    public boolean isEngineRunning() {
+        return engineProcess != null && engineProcess.isAlive();
+    }
 }
 

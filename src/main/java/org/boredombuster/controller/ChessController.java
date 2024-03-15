@@ -23,7 +23,7 @@ public class ChessController {
      *
      * @return validated for successful start or failed to start game
      */
-    @PostMapping("/start")
+   /* @PostMapping("/start")
     public ResponseEntity<String> startGame() {
         try {
             chessEngineService.startEngine(); //this may be redundant depending on how I want to handle in service
@@ -31,7 +31,20 @@ public class ChessController {
         } catch (IOException e) {
             return ResponseEntity.badRequest().body("failed to start game: " + e.getMessage());
         }
+    }*/
+
+    @PostMapping("/start")
+    public ResponseEntity<String> startGame() {
+        try {
+            if (!chessEngineService.isEngineRunning()) {
+                chessEngineService.startEngine();
+            }
+            return ResponseEntity.ok("Chess engine started successfully.");
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().body("Failed to start chess engine: " + e.getMessage());
+        }
     }
+
 
     /** Calls setup board with current positioning and calls best move method in service with depth
      * Depth specifies how many moves ahead stockfish will look to calculate best move
