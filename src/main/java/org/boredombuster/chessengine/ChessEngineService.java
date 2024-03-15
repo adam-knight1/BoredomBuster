@@ -107,5 +107,18 @@ public class ChessEngineService {
         public void calculateBestMove(int depth) throws IOException {
         sendCommand("go depth" + depth);
         }
+
+        private String readOutputUntilBestMove() throws IOException {
+        String line;
+        String bestMove = null;
+
+        while ((line = reader.readLine()) != null) {
+            if (line.startsWith("bestMove")) {
+                bestMove = line.split(" ")[1];
+                break;
+            }
+        }
+        return bestMove;
+        }
     }
 
