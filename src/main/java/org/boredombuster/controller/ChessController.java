@@ -23,15 +23,6 @@ public class ChessController {
      *
      * @return validated for successful start or failed to start game
      */
-   /* @PostMapping("/start")
-    public ResponseEntity<String> startGame() {
-        try {
-            chessEngineService.startEngine(); //this may be redundant depending on how I want to handle in service
-            return ResponseEntity.ok("Chess engine started success");
-        } catch (IOException e) {
-            return ResponseEntity.badRequest().body("failed to start game: " + e.getMessage());
-        }
-    }*/
     @PostMapping("/start")
     public ResponseEntity<String> startGame() {
         try {
