@@ -193,8 +193,6 @@ public class ChessEngineService {
         // Set the timeout for the future
         return future.get(30, TimeUnit.SECONDS); // timeout of 30 seconds
     }
-
-
     private String readOutputUntilBestMove() throws IOException {
         String line;
         String bestMove = null;

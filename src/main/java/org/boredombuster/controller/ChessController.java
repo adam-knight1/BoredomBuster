@@ -1,6 +1,8 @@
 package org.boredombuster.controller;
 
 import org.boredombuster.chessengine.ChessEngineService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,8 @@ import java.io.IOException;
 @RequestMapping("/api/chess")
 public class ChessController {
     private final ChessEngineService chessEngineService;
+    private static final Logger log = LoggerFactory.getLogger(ChessController.class);
+
     @Autowired
     public ChessController(ChessEngineService chessEngineService) {
         this.chessEngineService = chessEngineService;
