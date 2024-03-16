@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 @RestController
 @RequestMapping("/api/chess")
@@ -51,8 +53,20 @@ public class ChessController {
             chessEngineService.setupBoard(moves);
             String bestMove = chessEngineService.calculateBestMove(depth);
             return ResponseEntity.ok("Best move is: " + bestMove);
+        } catch (ExecutionException e) {
+            Throwable cause = e.getCause();
+            log.error("Calculation error", cause);
+            return ResponseEntity.internalServerError().body("Error calculating the best move: " + cause.getMessage());
+        } catch (InterruptedException e) {
+            log.error("Calculation was interrupted", e);
+            Thread.currentThread().interrupt();
+            return ResponseEntity.internalServerError().body("Calculation was interrupted.");
+        } catch (TimeoutException e) {
+            log.error("Calculation timed out", e);
+            return ResponseEntity.internalServerError().body("Calculation timed out.");
         } catch (IOException e) {
-            return ResponseEntity.badRequest().body("failed to calculate move: " + e.getMessage());
+            log.error("IO error", e);
+            return ResponseEntity.internalServerError().body("IO error while calculating the best move: " + e.getMessage());
         }
     }
 }
