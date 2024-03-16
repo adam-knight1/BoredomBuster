@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.*;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.*;
 
 /**
  * This class will help to integrate the stockfish chess engine into the app
@@ -22,6 +22,9 @@ public class ChessEngineService {
     private BufferedReader reader;
     private BufferedWriter writer;
     private String hardCodePath = "./bin/stockfish";
+
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor(); //making bestMove async, thread-safe
+
     @Value("${stockfish.path}")
     private String stockfishPath;
 
@@ -96,7 +99,39 @@ public class ChessEngineService {
         if (engineProcess != null) {
             engineProcess.destroy();
         }
+        closeQuietly(reader);
+        closeQuietly(writer);
+        shutdownAndAwaitTermination(executorService);
     }
+
+    private void closeQuietly(Closeable closeable) {
+        try {
+            if (closeable != null) {
+                closeable.close();
+            }
+        } catch (IOException e) {
+            // Log soon
+        }
+    }
+
+    void shutdownAndAwaitTermination(ExecutorService pool) {
+        pool.shutdown(); // Disable new tasks from being submitted
+        try {
+            // Wait a while for existing tasks to terminate
+            if (!pool.awaitTermination(60, TimeUnit.SECONDS)) {
+                pool.shutdownNow(); // Cancel currently executing tasks
+                // Wait  for tasks to respond to being cancelled
+                if (!pool.awaitTermination(60, TimeUnit.SECONDS))
+                    System.err.println("Pool did not terminate");
+            }
+        } catch (InterruptedException ie) {
+            // Cancel again if current thread also interrupted
+            pool.shutdownNow();
+            // Preserve interrupt status
+            Thread.currentThread().interrupt();
+        }
+    }
+
 
     /**
      * Send commands to stockfish service
@@ -139,11 +174,26 @@ public class ChessEngineService {
      * @throws IOException If there's an error communicating with the Stockfish process.
      */
 
-    public String calculateBestMove(int depth) throws IOException {
+    /*public String calculateBestMove(int depth) throws IOException {
         sendCommand("go depth " + depth); //this depth should set how far ahead stockfish looks for move analysis.
         // More moves ahead is harder but requires more computation time.
         return readOutputUntilBestMove(); //
+    }*/
+
+    public String calculateBestMove(int depth) throws ExecutionException, InterruptedException, TimeoutException {
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                sendCommand("go depth " + depth);
+                return readOutputUntilBestMove();
+            } catch (IOException e) {
+                throw new IllegalStateException("Failed to calculate best move", e);
+            }
+        }, executorService);
+
+        // Set the timeout for the future
+        return future.get(30, TimeUnit.SECONDS); // timeout of 30 seconds
     }
+
 
     private String readOutputUntilBestMove() throws IOException {
         String line;
