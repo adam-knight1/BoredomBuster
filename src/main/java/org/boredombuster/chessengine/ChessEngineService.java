@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.*;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * This class will help to integrate the stockfish chess engine into the app
@@ -26,14 +27,17 @@ public class ChessEngineService {
 
 
 
-    @PostConstruct // This should start it once at bean creation when spring boots up.
+    @PostConstruct
     public void init() {
-        try {
-            startEngine();
-        } catch (IOException e) {
-            System.err.println("Failed to start the Stockfish engine: " + e.getMessage());
-        }
+        CompletableFuture.runAsync(() -> {
+            try {
+                startEngine();
+            } catch (IOException e) {
+                System.err.println("Failed to start the Stockfish engine: " + e.getMessage());
+            }
+        });
     }
+
     /**
      * Method to start the stockfish engine
      * Configures the engine, sends UCI command to set up stockfish with UCI protocol

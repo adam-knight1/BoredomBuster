@@ -44,7 +44,6 @@ public class ChessController {
         }
     }
 
-
     /** Calls setup board with current positioning and calls best move method in service with depth
      * Depth specifies how many moves ahead stockfish will look to calculate best move
      * @param moves
