@@ -41,32 +41,34 @@ public class ChessController {
         }
     }
 
+    /** Start a new game method, calling the start method in ChessEngineService"
+     *
+     * @return
+     */
+    @PostMapping("/startNewGame")
+    public ResponseEntity<String> startNewGame() {
+        try {
+            chessEngineService.startNewGame();
+            return ResponseEntity.ok("New game started successfully.");
+        } catch (IOException e) {
+            log.error("Failed to start a new game", e);
+            return ResponseEntity.badRequest().body("Failed to start a new game: " + e.getMessage());
+        }
+    }
+
     /** Calls setup board with current positioning and calls best move method in service with depth
-     * Depth specifies how many moves ahead stockfish will look to calculate best move
-     * @param moves
-     * @param depth
-     * @return Response with best more or failed to calculate move response
+     * depth specifies how many moves ahead stockfish will look to calculate best move
      */
     @PostMapping("/move")
-    public ResponseEntity<String> makeMove(@RequestParam String moves, @RequestParam int depth) {
+    public ResponseEntity<String> makeMove(@RequestParam String playerMove) {
         try {
-            chessEngineService.setupBoard(moves);
+            int depth = 10;
+            chessEngineService.setupBoard("position startpos moves " + playerMove);
             String bestMove = chessEngineService.calculateBestMove(depth);
             return ResponseEntity.ok("Best move is: " + bestMove);
-        } catch (ExecutionException e) {
-            Throwable cause = e.getCause();
-            log.error("Calculation error", cause);
-            return ResponseEntity.internalServerError().body("Error calculating the best move: " + cause.getMessage());
-        } catch (InterruptedException e) {
-            log.error("Calculation was interrupted", e);
-            Thread.currentThread().interrupt();
-            return ResponseEntity.internalServerError().body("Calculation was interrupted.");
-        } catch (TimeoutException e) {
-            log.error("Calculation timed out", e);
-            return ResponseEntity.internalServerError().body("Calculation timed out.");
         } catch (IOException e) {
             log.error("IO error", e);
-            return ResponseEntity.internalServerError().body("IO error while calculating the best move: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("Error processing move" + e.getMessage());
         }
     }
 }

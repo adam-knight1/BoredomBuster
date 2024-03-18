@@ -187,13 +187,13 @@ public class ChessEngineService {
      * @throws IOException If there's an error communicating with the Stockfish process.
      */
 
-    /*public String calculateBestMove(int depth) throws IOException {
+    public String calculateBestMove(int depth) throws IOException {
         sendCommand("go depth " + depth); //this depth should set how far ahead stockfish looks for move analysis.
         // More moves ahead is harder but requires more computation time.
         return readOutputUntilBestMove(); //
-    }*/
+    }
 
-    public String calculateBestMove(int depth) throws ExecutionException, InterruptedException, TimeoutException {
+   /* public String calculateBestMove(int depth) throws ExecutionException, InterruptedException, TimeoutException {
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
             try {
                 sendCommand("go depth " + depth);
@@ -205,7 +205,7 @@ public class ChessEngineService {
 
         // Set the timeout for the future
         return future.get(30, TimeUnit.SECONDS); // timeout of 30 seconds
-    }
+    }*/
     private synchronized String readOutputUntilBestMove() throws IOException {
         String line;
         String bestMove = null;
