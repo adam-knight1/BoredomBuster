@@ -42,7 +42,6 @@ public class ChessEngineService {
             }
         });
     }
-
     /**
      * Method to start the stockfish engine
      * Configures the engine, sends UCI command to set up stockfish with UCI protocol
