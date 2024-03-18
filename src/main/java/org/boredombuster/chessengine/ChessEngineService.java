@@ -28,8 +28,9 @@ public class ChessEngineService {
     @Value("${stockfish.path}")
     private String stockfishPath;
 
-
-
+    /** init method to start the chess engine or return an error
+     *
+     */
     @PostConstruct
     public void init() {
         CompletableFuture.runAsync(() -> {
@@ -131,8 +132,6 @@ public class ChessEngineService {
             Thread.currentThread().interrupt();
         }
     }
-
-
     /**
      * Send commands to stockfish service
      *
@@ -154,7 +153,7 @@ public class ChessEngineService {
      */
 
     public void setupBoard(String moves) throws IOException {
-        sendCommand("position startpos moves" + moves); //starting from standard chess position
+        sendCommand("position startpos moves " + moves); //starting from standard chess position
 
         //I may not need this second ready check
         String line;
@@ -193,7 +192,7 @@ public class ChessEngineService {
         // Set the timeout for the future
         return future.get(30, TimeUnit.SECONDS); // timeout of 30 seconds
     }
-    private String readOutputUntilBestMove() throws IOException {
+    private synchronized String readOutputUntilBestMove() throws IOException {
         String line;
         String bestMove = null;
 
