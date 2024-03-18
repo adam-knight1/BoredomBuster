@@ -73,6 +73,21 @@ public class ChessEngineService {
         }
     }
 
+    /** method start a new game with stockfish, after engine start is complete
+     *
+     * @throws IOException
+     */
+    public void startNewGame() throws IOException {
+        sendCommand("ucinewgame"); //sending the uci commands
+        sendCommand("isready");
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (line.equals("readyok")) {
+                break; // stockfish ready for a new game
+            }
+        }
+    }
+
     /**
      * Read output from engine
      *
@@ -91,7 +106,6 @@ public class ChessEngineService {
         }
         return output.toString();
     }
-
     /**
      * Stop the stockfish engine
      **/
