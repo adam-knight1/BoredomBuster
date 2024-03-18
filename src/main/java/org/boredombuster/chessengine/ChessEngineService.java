@@ -22,6 +22,7 @@ public class ChessEngineService {
     private BufferedReader reader;
     private BufferedWriter writer;
     private String hardCodePath = "./bin/stockfish";
+    private String currentGameState = ""; //to track list of moves throughout game
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor(); //making bestMove async, thread-safe
 
