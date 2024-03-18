@@ -78,7 +78,6 @@ public class ChessEngineService {
             }
         }
     }
-
     /**
      * method start a new game with stockfish, after engine start is complete
      *
