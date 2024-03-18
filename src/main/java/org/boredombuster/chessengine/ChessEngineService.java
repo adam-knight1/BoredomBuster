@@ -87,8 +87,11 @@ public class ChessEngineService {
         sendCommand("ucinewgame"); //sending the uci commands
         sendCommand("isready");
         String line;
-        while (reader.ready()) { // checking if there's data available to prevent blocking
+        while (true) { // checking if there's data available to prevent blocking
             line = reader.readLine();
+            if (line == null) {
+                throw new IOException("Reader closed, failed to receive readyok");
+            }
             if (line.equals("readyok")) {
                 break; // Stockfish is ready
             }
