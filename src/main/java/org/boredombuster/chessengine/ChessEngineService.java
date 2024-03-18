@@ -89,7 +89,6 @@ public class ChessEngineService {
             }
         }
     }
-
     /**
      * Read output from engine
      *
