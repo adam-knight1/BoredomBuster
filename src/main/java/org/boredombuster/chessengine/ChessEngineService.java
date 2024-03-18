@@ -223,7 +223,7 @@ public class ChessEngineService {
 
         while ((line = reader.readLine()) != null) { //will read lines of output from SF until no more lines
             if (line.startsWith("bestmove")) {
-                if (line.contains("(none)"))  {
+                if (line.contains("mate"))  {
                 isCheckmate = true;
             } else {
                 bestMove = line.split(" ")[1]; //this should break up the response into array of strings and pull the 2nd index, which is the move
