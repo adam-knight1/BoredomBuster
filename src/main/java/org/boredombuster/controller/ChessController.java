@@ -62,10 +62,11 @@ public class ChessController {
     @PostMapping("/move")
     public ResponseEntity<String> makeMove(@RequestParam String playerMove) {
         try {
-            chessEngineService.updateGameState(playerMove);
-
+            chessEngineService.updateGameState(playerMove); //update the game
             chessEngineService.setupBoardWithCurrentGameState();
-            int depth = 10;
+
+            int depth = 10; //set depth for stockfish to look ahead for best move
+
             String bestMove = chessEngineService.calculateBestMove(depth);
 
             chessEngineService.updateGameState(bestMove);
