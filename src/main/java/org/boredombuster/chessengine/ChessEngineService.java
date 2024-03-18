@@ -180,6 +180,15 @@ public class ChessEngineService {
         }
     }
 
+    //method to concatenate moves onto list of currentMoveState
+    public void updateGameState(String newMove) {
+        if (!currentGameState.isEmpty()) {
+            currentGameState += " ";
+        }
+        currentGameState += newMove;
+    }
+
+
     /**
      * Asks Stockfish to calculate the best move based on the current board state.
      *
