@@ -196,7 +196,6 @@ public class ChessEngineService {
         currentGameState += newMove;
     }
 
-
     /**
      * Asks Stockfish to calculate the best move based on the current board state.
      *
