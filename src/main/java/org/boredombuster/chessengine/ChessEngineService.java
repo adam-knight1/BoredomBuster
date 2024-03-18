@@ -82,9 +82,10 @@ public class ChessEngineService {
         sendCommand("ucinewgame"); //sending the uci commands
         sendCommand("isready");
         String line;
-        while ((line = reader.readLine()) != null) {
+        while (reader.ready()) { // checking if there's data available to prevent blocking
+            line = reader.readLine();
             if (line.equals("readyok")) {
-                break; // stockfish ready for a new game
+                break; // Stockfish is ready
             }
         }
     }
