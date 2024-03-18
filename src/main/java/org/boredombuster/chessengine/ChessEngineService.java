@@ -91,7 +91,6 @@ public class ChessEngineService {
         }
         currentGameState = ""; //reset the current game state if playing a game prior
     }
-
     /**
      * Read output from engine
      *
