@@ -25,7 +25,8 @@ public class ChessController {
         this.chessEngineService = chessEngineService;
     }
 
-    /** starts the chess engine by calling the method in ChessEngineService
+    /**
+     * Starts the chess engine by calling the method in ChessEngineService
      *
      * @return validated for successful start or failed to start game
      */
@@ -41,7 +42,8 @@ public class ChessController {
         }
     }
 
-    /** Start a new game method, calling the start method in ChessEngineService"
+    /**
+     * Start a new game method, calling the start method in ChessEngineService"
      *
      * @return
      */
@@ -56,7 +58,8 @@ public class ChessController {
         }
     }
 
-    /** Calls setup board with current positioning and calls best move method in service with depth
+    /**
+     * Calls setup board with current positioning and calls best move method in service with depth
      * depth specifies how many moves ahead stockfish will look to calculate best move
      */
     @PostMapping("/move")

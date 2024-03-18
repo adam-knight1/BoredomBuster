@@ -29,8 +29,8 @@ public class ChessEngineService {
     @Value("${stockfish.path}")
     private String stockfishPath;
 
-    /** init method to start the chess engine or return an error
-     *
+    /**
+     * init method to start the chess engine or return an error
      */
     @PostConstruct
     public void init() {
@@ -42,6 +42,7 @@ public class ChessEngineService {
             }
         });
     }
+
     /**
      * Method to start the stockfish engine
      * Configures the engine, sends UCI command to set up stockfish with UCI protocol
@@ -73,7 +74,8 @@ public class ChessEngineService {
         }
     }
 
-    /** method start a new game with stockfish, after engine start is complete
+    /**
+     * method start a new game with stockfish, after engine start is complete
      *
      * @throws IOException
      */
@@ -107,6 +109,7 @@ public class ChessEngineService {
         }
         return output.toString();
     }
+
     /**
      * Stop the stockfish engine
      **/
@@ -147,6 +150,7 @@ public class ChessEngineService {
             Thread.currentThread().interrupt();
         }
     }
+
     /**
      * Send commands to stockfish service
      *
@@ -207,33 +211,35 @@ public class ChessEngineService {
         return readOutputUntilBestMove(); //
     }
 
-   /* public String calculateBestMove(int depth) throws ExecutionException, InterruptedException, TimeoutException {
-        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
-            try {
-                sendCommand("go depth " + depth);
-                return readOutputUntilBestMove();
-            } catch (IOException e) {
-                throw new IllegalStateException("Failed to calculate best move", e);
-            }
-        }, executorService);
-
-        // Set the timeout for the future
-        return future.get(30, TimeUnit.SECONDS); // timeout of 30 seconds
-    }*/
+    /** Reads the stockfish output until UCI response bestmove is detected
+     *
+     * @return
+     * @throws IOException
+     */
     private synchronized String readOutputUntilBestMove() throws IOException {
         String line;
         String bestMove = null;
+        boolean isCheckmate = false;
 
         while ((line = reader.readLine()) != null) { //will read lines of output from SF until no more lines
-            if (line.startsWith("bestmove")) { //potential for error with camelCase
+            if (line.startsWith("bestmove")) {
+                if (line.contains("(none)"))  {
+                isCheckmate = true;
+            } else {
                 bestMove = line.split(" ")[1]; //this should break up the response into array of strings and pull the 2nd index, which is the move
                 break;
             }
         }
+    }
+        if (isCheckmate){
+            return "checkmate";
+        }
+
         return bestMove;
     }
 
-    /** adding to test new controller method now that start logic has been moved to service
+    /**
+     * adding to test new controller method now that start logic has been moved to service
      *
      * @return Whether engine is null or alive
      */
