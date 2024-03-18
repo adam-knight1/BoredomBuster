@@ -116,7 +116,6 @@ public class ChessEngineService {
         }
         return output.toString();
     }
-
     /**
      * Stop the stockfish engine
      **/
