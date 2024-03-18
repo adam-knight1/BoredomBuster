@@ -180,6 +180,10 @@ public class ChessEngineService {
         }
     }
 
+    public void setupBoardWithCurrentGameState() throws IOException {
+        sendCommand("position startpos moves " + currentGameState);
+    }
+
     //method to concatenate moves onto list of currentMoveState
     public void updateGameState(String newMove) {
         if (!currentGameState.isEmpty()) {

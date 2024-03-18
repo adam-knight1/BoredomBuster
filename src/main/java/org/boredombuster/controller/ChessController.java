@@ -62,6 +62,9 @@ public class ChessController {
     @PostMapping("/move")
     public ResponseEntity<String> makeMove(@RequestParam String playerMove) {
         try {
+            chessEngineService.updateGameState(playerMove);
+
+            chessEngineService.setu
             int depth = 10;
             chessEngineService.setupBoard("position startpos moves " + playerMove);
             String bestMove = chessEngineService.calculateBestMove(depth);
