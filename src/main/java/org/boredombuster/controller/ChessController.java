@@ -64,10 +64,11 @@ public class ChessController {
         try {
             chessEngineService.updateGameState(playerMove);
 
-            chessEngineService.setu
+            chessEngineService.setupBoardWithCurrentGameState();
             int depth = 10;
-            chessEngineService.setupBoard("position startpos moves " + playerMove);
             String bestMove = chessEngineService.calculateBestMove(depth);
+
+            chessEngineService.updateGameState(bestMove);
             return ResponseEntity.ok("Best move is: " + bestMove);
         } catch (IOException e) {
             log.error("IO error", e);
