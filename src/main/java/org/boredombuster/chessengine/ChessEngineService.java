@@ -1,5 +1,8 @@
 package org.boredombuster.chessengine;
 
+import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,8 @@ public class ChessEngineService {
     private BufferedWriter writer;
     private String hardCodePath = "./bin/stockfish";
     private String currentGameState = ""; //to track list of moves throughout game
+
+    private static final Logger log = LoggerFactory.getLogger(ChessEngineService.class);
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor(); //making bestMove async, thread-safe
 
@@ -190,10 +195,13 @@ public class ChessEngineService {
 
     //method to concatenate moves onto list of currentMoveState
     public void updateGameState(String newMove) {
+        log.info("Before updateGameState: " + currentGameState);
         if (!currentGameState.isEmpty()) {
             currentGameState += " ";
         }
         currentGameState += newMove;
+        log.info("After updateGameState: " + currentGameState);
+
     }
 
     /**
