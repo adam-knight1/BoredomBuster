@@ -89,6 +89,7 @@ public class ChessEngineService {
                 break; // Stockfish is ready
             }
         }
+        currentGameState = ""; //reset the current game state if playing a game prior
     }
 
     /**
@@ -174,7 +175,6 @@ public class ChessEngineService {
     public void setupBoard(String moves) throws IOException {
         sendCommand("position startpos moves " + moves); //starting from standard chess position
 
-        //I may not need this second ready check
         String line;
         sendCommand("isready");
         while ((line = reader.readLine()) != null) {
@@ -213,6 +213,7 @@ public class ChessEngineService {
 
     /** Reads the stockfish output until UCI response bestmove is detected
      *
+     *
      * @return
      * @throws IOException
      */
@@ -232,15 +233,13 @@ public class ChessEngineService {
         }
     }
         if (isCheckmate){
-            return "checkmate";
+            bestMove = "checkmate";  //returning a command for the front end to pick up on
         }
-
         return bestMove;
     }
 
     /**
-     * adding to test new controller method now that start logic has been moved to service
-     *
+     *Method that is useful for testing/debugging start engine controller and service methods
      * @return Whether engine is null or alive
      */
     public boolean isEngineRunning() {
