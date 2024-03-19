@@ -29,7 +29,6 @@ public class TriviaService {
     Scanner scanner = new Scanner(System.in);
     String apiUrl = "https://api.api-ninjas.com/v1/trivia?category=";
 
-
     /** This method takes the logic from the previous CLI implementation of this app, and packages it in a way that interacts
      * with the trivia controller, which handles the API routing and IO operations from the frontend
      * @param category

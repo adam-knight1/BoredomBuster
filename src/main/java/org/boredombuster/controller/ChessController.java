@@ -68,14 +68,14 @@ public class ChessController {
             chessEngineService.updateGameState(playerMove); //update the game
             chessEngineService.setupBoardWithCurrentGameState();
 
-            int depth = 10; //set depth for stockfish to look ahead for best move
+            int depth = 3; //set depth for stockfish to look ahead for best move
             String bestMove = chessEngineService.calculateBestMove(depth);
 
             if (bestMove.equals("checkmate")) {
                 return ResponseEntity.ok("Checkmate! Game over.");
             } else {
                 chessEngineService.updateGameState(bestMove); // Update the game state with Stockfish's move
-                return ResponseEntity.ok("Best move is: " + bestMove);
+                return ResponseEntity.ok(bestMove);
             }
         } catch (IOException e) {
             log.error("IO error", e);
