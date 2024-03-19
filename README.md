@@ -1,9 +1,9 @@
 # BoredomBuster Backend
 
-The live application can be viewed at https://www.boredombuster.fyi
-
 BoredomBuster is an interactive backend application built using Spring, designed to serve a variety of informational and entertaining APIs. 
 It powers the frontend React/Next.js application, which can be found [here](https://github.com/adam-knight1/boredombusterfrontend).
+
+The live application can be viewed at https://www.boredombuster.fyi
 
 ## Current Features
 
