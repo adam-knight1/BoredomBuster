@@ -81,19 +81,7 @@ public class ChessEngineService {
      *
      * @throws IOException
      */
-    /*public void startNewGame() throws IOException {
-        sendCommand("ucinewgame"); //sending the uci commands
-        sendCommand("isready");
-        String line;
-        // Stockfish is ready
-        do { // checking if there's data available to prevent blocking
-            line = reader.readLine();
-            if (line == null) {
-                throw new IOException("Reader closed, failed to receive readyok");
-            }
-        } while (!line.equals("readyok"));
-        currentGameState = ""; //reset the current game state if playing a game prior
-    }*/
+
     public void startNewGame() throws IOException {
         sendCommand("ucinewgame");
         sendCommand("isready");
