@@ -5,6 +5,8 @@ It powers the frontend React/Next.js application, which can be found [here](http
 
 ## Current Features
 
+- AI assistant powered by Chat GPT 3.5 turbo
+- Chess engine powered by Stockfish
 - Weather: Searching for weather info by city/state or zip
 - Trivia: A large collection of trivia questions and answers
 - Historical Facts
@@ -29,7 +31,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the backend repository
 2. Navigate to the cloned directory: cd boredombusterbackend
-4. Use the Gradle Wrapper to build and run the project: ./gradlew bootRun
+3. Use the Gradle Wrapper to build and run the project: ./gradlew bootRun
 
 The server will start, and you can begin to make requests to http://localhost:8080/
 

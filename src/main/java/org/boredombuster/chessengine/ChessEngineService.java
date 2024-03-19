@@ -26,9 +26,7 @@ public class ChessEngineService {
     private BufferedWriter writer;
     private String hardCodePath = "./bin/stockfish";
     private String currentGameState = ""; //to track list of moves throughout game
-
     private static final Logger log = LoggerFactory.getLogger(ChessEngineService.class);
-
     private final ExecutorService executorService = Executors.newSingleThreadExecutor(); //making bestMove async, thread-safe
 
     @Value("${stockfish.path}")
@@ -83,21 +81,32 @@ public class ChessEngineService {
      *
      * @throws IOException
      */
-    public void startNewGame() throws IOException {
+    /*public void startNewGame() throws IOException {
         sendCommand("ucinewgame"); //sending the uci commands
         sendCommand("isready");
         String line;
-        while (true) { // checking if there's data available to prevent blocking
+        // Stockfish is ready
+        do { // checking if there's data available to prevent blocking
             line = reader.readLine();
             if (line == null) {
                 throw new IOException("Reader closed, failed to receive readyok");
             }
+        } while (!line.equals("readyok"));
+        currentGameState = ""; //reset the current game state if playing a game prior
+    }*/
+    public void startNewGame() throws IOException {
+        sendCommand("ucinewgame");
+        sendCommand("isready");
+        String line;
+        while (reader.ready()) {
+            line = reader.readLine();
             if (line.equals("readyok")) {
                 break; // Stockfish is ready
             }
         }
         currentGameState = ""; //reset the current game state if playing a game prior
     }
+
     /**
      * Read output from engine
      *
@@ -196,12 +205,12 @@ public class ChessEngineService {
 
     //method to concatenate moves onto list of currentMoveState
     public void updateGameState(String newMove) {
-        log.info("Before updateGameState: " + currentGameState);
+       // log.info("Before updateGameState: " + currentGameState);
         if (!currentGameState.isEmpty()) {
             currentGameState += " ";
         }
         currentGameState += newMove;
-        log.info("After updateGameState: " + currentGameState);
+      //  log.info("After updateGameState: " + currentGameState);
 
     }
 
