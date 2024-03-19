@@ -2,8 +2,6 @@
 
 The live application can be viewed at https://www.boredombuster.fyi
 
-Stockfish source code available [here](https://github.com/official-stockfish/Stockfish)
-
 BoredomBuster is an interactive backend application built using Spring, designed to serve a variety of informational and entertaining APIs. 
 It powers the frontend React/Next.js application, which can be found [here](https://github.com/adam-knight1/boredombusterfrontend).
 
@@ -42,4 +40,7 @@ The server will start, and you can begin to make requests to http://localhost:80
 
 This is a new project that is being continually developed, with updates generally being made on a daily basis.
 Please refer back to GitHub for the latest version.
+
+Stockfish source code available [here](https://github.com/official-stockfish/Stockfish)
+
 
