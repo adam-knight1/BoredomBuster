@@ -1,5 +1,9 @@
 # BoredomBuster Backend
 
+The live application can be viewed at https://www.boredombuster.fyi
+
+Stockfish source code avaiable [here](https://github.com/official-stockfish/Stockfish)
+
 BoredomBuster is an interactive backend application built using Spring, designed to serve a variety of informational and entertaining APIs. 
 It powers the frontend React/Next.js application, which can be found [here](https://github.com/adam-knight1/boredombusterfrontend).
 
@@ -9,18 +13,17 @@ It powers the frontend React/Next.js application, which can be found [here](http
 - Chess engine powered by Stockfish
 - Weather: Searching for weather info by city/state or zip
 - Trivia: A large collection of trivia questions and answers
-- Historical Facts
-- Dog ratings (energy level, grooming etc.)
+- Information about various dog breeds
 - And more...
 
 ## Frontend Application
 
-The frontend for BoredomBuster is a React/Next.js application that consumes the APIs provided by this backend. 
-You can start the frontend locally by running `npm run dev` if you have the repository cloned, or visit [BoredomBusterFrontend](https://github.com/adam-knight1/boredombusterfrontend) for more details.
+The frontend for BoredomBuster is a React/Next.js application that consumes the APIs provided by this backend 
+You can start the frontend locally by running `npm run dev` if you have the repository cloned or on Github: [BoredomBusterFrontend](https://github.com/adam-knight1/boredombusterfrontend).  You can also check it out the live application at https://boredombuster.fyi
 
-## Getting Started
+## Getting Started Locally
 
-To get a local copy up and running follow these simple steps.
+If you'd like to run the project locally, follow the simple steps below...
 
 ### Prerequisites
 
@@ -38,5 +41,5 @@ The server will start, and you can begin to make requests to http://localhost:80
 ### Future Direction
 
 This is a new project that is being continually developed, with updates generally being made on a daily basis.
-Please check GitHub for the latest version.
+Please refer back to GitHub for the latest version.
 
